@@ -1,4 +1,4 @@
-package code.audio_system.views;
+package code.digital_camera.views;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

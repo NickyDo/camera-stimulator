@@ -1,13 +1,13 @@
-package code.digitalcamera.camera_system;
+package code.digital_camera;
 
-import code.digitalcamera.camera_system.controllers.Controller;
-import code.digitalcamera.camera_system.controllers.ControllerInterface;
-import code.digitalcamera.camera_system.views.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import code.digital_camera.controllers.Controller;
+import code.digital_camera.controllers.ControllerInterface;
+import code.digital_camera.views.View;
 
 public class MyApplication extends Application{
     View view;

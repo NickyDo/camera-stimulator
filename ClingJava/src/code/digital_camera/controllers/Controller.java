@@ -1,11 +1,5 @@
-package code.digitalcamera.camera_system.controllers;
+package code.digital_camera.controllers;
 
-import code.digitalcamera.camera_system.Constants;
-import code.digitalcamera.camera_system.models.AudioMode;
-import code.digitalcamera.camera_system.models.services.AudioControl;
-import code.digitalcamera.camera_system.models.services.PlayMusic;
-import code.digitalcamera.camera_system.models.services.SwitchPower;
-import code.digitalcamera.camera_system.views.ViewInterface;
 import org.fourthline.cling.UpnpService;
 import org.fourthline.cling.UpnpServiceImpl;
 import org.fourthline.cling.binding.LocalServiceBindingException;
@@ -28,6 +22,12 @@ import org.fourthline.cling.model.types.UDN;
 import org.fourthline.cling.registry.DefaultRegistryListener;
 import org.fourthline.cling.registry.Registry;
 import org.fourthline.cling.registry.RegistryListener;
+import code.digital_camera.Constants;
+import code.digital_camera.models.AudioMode;
+import code.digital_camera.models.services.AudioControl;
+import code.digital_camera.models.services.PlayMusic;
+import code.digital_camera.models.services.SwitchPower;
+import code.digital_camera.views.ViewInterface;
 
 import java.io.IOException;
 import java.util.Map;

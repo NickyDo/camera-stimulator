@@ -1,4 +1,4 @@
-package code.simple_vibrator;
+package code.camera_server;
 
 import org.fourthline.cling.binding.annotations.*;
 

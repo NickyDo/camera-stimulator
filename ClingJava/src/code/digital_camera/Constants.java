@@ -1,6 +1,6 @@
-package code.digitalcamera.camera_system;
+package code.digital_camera;
 
-import code.digitalcamera.camera_system.models.AudioMode;
+import code.digital_camera.models.AudioMode;
 
 public class Constants {
     // device

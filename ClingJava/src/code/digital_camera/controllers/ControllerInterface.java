@@ -1,6 +1,6 @@
-package code.digitalcamera.camera_system.controllers;
+package code.digital_camera.controllers;
 
-import code.digitalcamera.camera_system.models.AudioMode;
+import code.digital_camera.models.AudioMode;
 
 public interface ControllerInterface {
     boolean setPowerStatus(boolean status);

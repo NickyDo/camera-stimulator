@@ -1,12 +1,12 @@
-package code.digitalcamera.camera_system.controllers;
+package code.digital_camera.controllers;
 
-import code.digitalcamera.camera_system.Constants;
-import code.digitalcamera.camera_system.models.AudioMode;
 import org.fourthline.cling.UpnpService;
 import org.fourthline.cling.controlpoint.ActionCallback;
 import org.fourthline.cling.model.action.ActionInvocation;
 import org.fourthline.cling.model.message.UpnpResponse;
 import org.fourthline.cling.model.meta.Service;
+import code.digital_camera.Constants;
+import code.digital_camera.models.AudioMode;
 
 public class ActionExecutor {
 

@@ -1,6 +1,6 @@
-package code.digitalcamera.camera_system.views;
+package code.digital_camera.views;
 
-import code.digitalcamera.camera_system.models.AudioMode;
+import code.digital_camera.models.AudioMode;
 
 public interface ViewInterface {
     void onVolumeChange(int newValue);

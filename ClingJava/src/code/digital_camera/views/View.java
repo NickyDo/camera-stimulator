@@ -1,13 +1,11 @@
-package code.digitalcamera.camera_system.views;
+package code.digital_camera.views;
 
-import code.digitalcamera.camera_system.Constants;
-import code.digitalcamera.camera_system.controllers.ControllerInterface;
-import code.digitalcamera.camera_system.models.AudioMode;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -20,6 +18,9 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import code.digital_camera.Constants;
+import code.digital_camera.controllers.ControllerInterface;
+import code.digital_camera.models.AudioMode;
 
 import java.net.URL;
 import java.util.ArrayList;

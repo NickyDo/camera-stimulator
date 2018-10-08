@@ -1,4 +1,4 @@
-package code.digitalcamera.camera_system.models;
+package code.digital_camera.models;
 
 public enum AudioMode {
     NORMAL,

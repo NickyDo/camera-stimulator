@@ -1,7 +1,7 @@
-package code.audio_system.models.services;
+package code.digital_camera.models.services;
 
 import org.fourthline.cling.binding.annotations.*;
-import code.audio_system.Constants;
+import code.digital_camera.Constants;
 
 import java.beans.PropertyChangeSupport;
 

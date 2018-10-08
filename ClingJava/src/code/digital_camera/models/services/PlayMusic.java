@@ -1,7 +1,7 @@
-package code.digitalcamera.camera_system.models.services;
+package code.digital_camera.models.services;
 
-import code.digitalcamera.camera_system.Constants;
 import org.fourthline.cling.binding.annotations.*;
+import code.digital_camera.Constants;
 
 import java.beans.PropertyChangeSupport;
 
