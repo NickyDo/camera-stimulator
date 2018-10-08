@@ -60,12 +60,12 @@ public class CameraServer implements Runnable {
         Icon icon = new Icon("image/jpg", 48, 48, 8, getClass().getResource("/resources/camera.png"));
 
         LocalService<SwitchPower> switchPowerService = new AnnotationLocalServiceBinder().read(SwitchPower.class);
-
         switchPowerService.setManager(new DefaultServiceManager(switchPowerService, SwitchPower.class));
 
         LocalService<SetFlash> setFlashService = new AnnotationLocalServiceBinder().read(SetFlash.class);
+        setFlashService.setManager(new DefaultServiceManager(setFlashService, SetFlash.class));
 
-//        return new LocalDevice(identity, type, details, icon, switchPowerService);
+//        return new LocalDevice(identity, type, details, icon, setFlashService);
 
         return new LocalDevice(identity, type, details, icon, new LocalService[]{switchPowerService, setFlashService});
 
