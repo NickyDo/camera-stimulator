@@ -144,7 +144,7 @@ public class View implements Initializable, ViewInterface {
             }
 
             if (!trebleSlider.isValueChanging() || trebleSlider.getValue() == 120 || trebleSlider.getValue() == 0) {
-                controller.setTrebleLevel((int) trebleSlider.getValue());
+                controller.setZoomLevel((int) trebleSlider.getValue());
             }
             trebleNumber.setText(String.format("%.0f", trebleSlider.getValue()));
         });
@@ -351,11 +351,11 @@ public class View implements Initializable, ViewInterface {
     }
 
     @Override
-    public void onTrebleLevelChange(int newValue) {
+    public void onZoomLevelChange(int newValue) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                if (newValue >= Constants.TREBLE_MIN && newValue <= Constants.TREBLE_MAX) {
+                if (newValue >= Constants.ZOOM_MIN && newValue <= Constants.ZOOM_MAX) {
                     trebleSlider.setValue(newValue);
                     trebleNumber.setText(String.format("%.0f", trebleSlider.getValue()));
                 }

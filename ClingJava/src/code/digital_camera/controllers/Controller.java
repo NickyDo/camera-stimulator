@@ -224,9 +224,9 @@ public class Controller implements ControllerInterface {
                     int value = (int) values.get(Constants.CONTRAST_LEVEL).getValue();
                     view.onContrastLevelChange(value);
                     System.out.println("New value: " + value);
-                } else if (values.containsKey(Constants.TREBLE_LEVEL)) {
-                    int value = (int) values.get(Constants.TREBLE_LEVEL).getValue();
-                    view.onTrebleLevelChange(value);
+                } else if (values.containsKey(Constants.ZOOM_LEVEL)) {
+                    int value = (int) values.get(Constants.ZOOM_LEVEL).getValue();
+                    view.onZoomLevelChange(value);
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.AUDIO_MODE)) {
                     String value = (String) values.get(Constants.AUDIO_MODE).getValue();
@@ -376,28 +376,28 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public boolean setTrebleLevel(int value) {
+    public boolean setZoomLevel(int value) {
         Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
-            actionExecutor.setTrebleLevel(upnpService, service, value);
+            actionExecutor.setZoomLevel(upnpService, service, value);
         }
         return true;
     }
 
     @Override
-    public boolean increaseTrebleLevel() {
+    public boolean increaseZoomLevel() {
         Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
-            actionExecutor.increaseTrebleLevel(upnpService, service);
+            actionExecutor.increaseZoomLevel(upnpService, service);
         }
         return true;
     }
 
     @Override
-    public boolean decreaseTrebleLevel() {
+    public boolean decreaseZoomLevel() {
         Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
-            actionExecutor.decreaseTrebleLevel(upnpService, service);
+            actionExecutor.decreaseZoomLevel(upnpService, service);
         }
         return true;
     }

@@ -6,9 +6,9 @@ public interface ControllerInterface {
     boolean setPowerStatus(boolean status);
     boolean increaseLight();
     boolean decreaseLight();
-    boolean setTrebleLevel(int value);
-    boolean increaseTrebleLevel();
-    boolean decreaseTrebleLevel();
+    boolean setZoomLevel(int value);
+    boolean increaseZoomLevel();
+    boolean decreaseZoomLevel();
     boolean setContrastLevel(int value);
     boolean increaseContrastLevel();
     boolean decreaseContrastLevel();

@@ -152,8 +152,8 @@ public class ActionExecutor {
         );
     }
 
-    public void setTrebleLevel(UpnpService upnpService, Service service, int value) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_TREBLE_LEVEL));
+    public void setZoomLevel(UpnpService upnpService, Service service, int value) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_ZOOM_LEVEL));
         getTargetInvocation.setInput(Constants.IN, value);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -172,8 +172,8 @@ public class ActionExecutor {
         );
     }
 
-    public void increaseTrebleLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.INCREASE_TREBLE_LEVEL));
+    public void increaseZoomLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.INCREASE_ZOOM_LEVEL));
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
 
@@ -191,8 +191,8 @@ public class ActionExecutor {
         );
     }
 
-    public void decreaseTrebleLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.DECREASE_TREBLE_LEVEL));
+    public void decreaseZoomLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.DECREASE_ZOOM_LEVEL));
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
 
@@ -391,8 +391,8 @@ public class ActionExecutor {
         );
     }
 
-    public void getTrebleLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_TREBLE_LEVEL));
+    public void getZoomLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_ZOOM_LEVEL));
         getTargetInvocation.getOutput(Constants.OUT);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -400,8 +400,8 @@ public class ActionExecutor {
                     @Override
                     public void success(ActionInvocation invocation) {
                         assert invocation.getOutput().length == 0;
-                        int trebleLevel = (int) invocation.getOutput()[0].getValue();
-                        System.out.println("Current trebleLevel: " + trebleLevel);
+                        int zoomLevel = (int) invocation.getOutput()[0].getValue();
+                        System.out.println("Current zoomLevel: " + zoomLevel);
                     }
 
                     @Override

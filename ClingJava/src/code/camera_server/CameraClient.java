@@ -187,8 +187,8 @@ public class CameraClient implements Runnable {
                 } else if (values.containsKey(Constants.CONTRAST_LEVEL)) {
                     int value = (int) values.get(Constants.CONTRAST_LEVEL).getValue();
                     System.out.println("New value: " + value);
-                } else if (values.containsKey(Constants.TREBLE_LEVEL)) {
-                    int value = (int) values.get(Constants.TREBLE_LEVEL).getValue();
+                } else if (values.containsKey(Constants.ZOOM_LEVEL)) {
+                    int value = (int) values.get(Constants.ZOOM_LEVEL).getValue();
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.AUDIO_MODE)) {
                     String value = (String) values.get(Constants.AUDIO_MODE).getValue();

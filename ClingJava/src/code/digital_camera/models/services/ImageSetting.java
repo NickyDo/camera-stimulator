@@ -43,10 +43,10 @@ public class ImageSetting {
 
     @UpnpStateVariable(
             defaultValue = "0",
-            allowedValueMinimum = Constants.TREBLE_MIN,
-            allowedValueMaximum = Constants.TREBLE_MAX
+            allowedValueMinimum = Constants.ZOOM_MIN,
+            allowedValueMaximum = Constants.ZOOM_MAX
     )
-    private int trebleLevel;
+    private int zoomLevel;
 
     @UpnpStateVariable(
             defaultValue = "NORMAL",
@@ -122,31 +122,31 @@ public class ImageSetting {
     }
 
     @UpnpAction(out = @UpnpOutputArgument(name = Constants.OUT))
-    public int getTrebleLevel() {
-        return trebleLevel;
+    public int getZoomLevel() {
+        return zoomLevel;
     }
 
     @UpnpAction
-    public void setTrebleLevel(@UpnpInputArgument(name = Constants.IN) int trebleLevel) {
-        if (trebleLevel >= Constants.TREBLE_MIN && trebleLevel <= Constants.TREBLE_MAX) {
-            this.trebleLevel = trebleLevel;
-            getPropertyChangeSupport().firePropertyChange(Constants.TREBLE_LEVEL, null, null);
+    public void setZoomLevel(@UpnpInputArgument(name = Constants.IN) int zoomLevel) {
+        if (zoomLevel >= Constants.ZOOM_MIN && zoomLevel <= Constants.ZOOM_MAX) {
+            this.zoomLevel = zoomLevel;
+            getPropertyChangeSupport().firePropertyChange(Constants.ZOOM_LEVEL, null, null);
         }
     }
 
     @UpnpAction
-    public void increaseTrebleLevel() {
-        if (trebleLevel + 1 <= Constants.TREBLE_MAX) {
-            trebleLevel++;
-            getPropertyChangeSupport().firePropertyChange(Constants.TREBLE_LEVEL, null, null);
+    public void increaseZoomLevel() {
+        if (zoomLevel + 1 <= Constants.ZOOM_MAX) {
+            zoomLevel++;
+            getPropertyChangeSupport().firePropertyChange(Constants.ZOOM_LEVEL, null, null);
         }
     }
 
     @UpnpAction
-    public void decreaseTrebleLevel() {
-        if (trebleLevel - 1 >= Constants.TREBLE_MIN) {
-            trebleLevel--;
-            getPropertyChangeSupport().firePropertyChange(Constants.TREBLE_LEVEL, null, null);
+    public void decreaseZoomLevel() {
+        if (zoomLevel - 1 >= Constants.ZOOM_MIN) {
+            zoomLevel--;
+            getPropertyChangeSupport().firePropertyChange(Constants.ZOOM_LEVEL, null, null);
         }
     }
 
