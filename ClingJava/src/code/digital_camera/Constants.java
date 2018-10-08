@@ -4,10 +4,10 @@ import code.digital_camera.models.AudioMode;
 
 public class Constants {
     // device
-    public static final String DEVICE_NAME = "AudioSystem";
+    public static final String DEVICE_NAME = "SmartCamera";
     public static final String MANUFACTURER_DETAILS = "1918";
-    public static final String MODEL_DETAILS = "AS2018";
-    public static final String MODEL_DESCRIPTION = "Simple Audio System";
+    public static final String MODEL_DETAILS = "SC2018";
+    public static final String MODEL_DESCRIPTION = "Smart Camera System";
     public static final String MODEL_NUMBER = "v1";
 
     // switch power service
@@ -22,31 +22,31 @@ public class Constants {
     public static final String RESULT_STATUS = "ResultStatus";
 
     // audio control service
-    public static final String AUDIO_CONTROL = "AudioControl";
-    public static final String VOLUME = "Volume";
-    public static final String GET_VOLUME = "GetVolume";
-    public static final String SET_VOLUME = "SetVolume";
-    public static final String INCREASE_VOLUME = "IncreaseVolume";
-    public static final String DECREASE_VOLUME = "DecreaseVolume";
-    public static final String BASS_LEVEL = "BassLevel";
-    public static final String GET_BASS_LEVEL = "GetBassLevel";
-    public static final String SET_BASS_LEVEL = "SetBassLevel";
-    public static final String INCREASE_BASS_LEVEL = "IncreaseBassLevel";
-    public static final String DECREASE_BASS_LEVEL = "DecreaseBassLevel";
-    public static final String TREBLE_LEVEL = "TrebleLevel";
-    public static final String GET_TREBLE_LEVEL = "GetTrebleLevel";
-    public static final String SET_TREBLE_LEVEL = "SetTrebleLevel";
-    public static final String INCREASE_TREBLE_LEVEL = "IncreaseTrebleLevel";
-    public static final String DECREASE_TREBLE_LEVEL = "DecreaseTrebleLevel";
+    public static final String IMAGE_SETTING = "ImageSetting";
+    public static final String LIGHT = "Light";
+    public static final String GET_LIGHT = "GetLight";
+    public static final String SET_LIGHT = "SetLight";
+    public static final String INCREASE_LIGHT = "IncreaseLight";
+    public static final String DECREASE_LIGHT = "DecreaseLight";
+    public static final String CONTRAST_LEVEL = "ContrastLevel";
+    public static final String GET_CONTRAST_LEVEL = "GetContrastLevel";
+    public static final String SET_CONTRAST_LEVEL = "SetContrastLevel";
+    public static final String INCREASE_CONTRAST_LEVEL = "IncreaseContrastLevel";
+    public static final String DECREASE_CONTRAST_LEVEL = "DecreaseContrastLevel";
+    public static final String ZOOM_LEVEL = "ZoomLevel";
+    public static final String GET_ZOOM_LEVEL = "GetZoomLevel";
+    public static final String SET_ZOOM_LEVEL = "SetZoomLevel";
+    public static final String INCREASE_ZOOM_LEVEL = "IncreaseZoomLevel";
+    public static final String DECREASE_ZOOM_LEVEL = "DecreaseZoomLevel";
     public static final String AUDIO_MODE = "AudioMode";
     public static final String GET_AUDIO_MODE = "GetAudioMode";
     public static final String SET_AUDIO_MODE = "SetAudioMode";
 
     // play music service
-    public static final String PLAY_MUSIC = "PlayMusic";
-    public static final String PLAY_STATUS = "PlayStatus";
-    public static final String GET_PLAY_STATUS = "GetPlayStatus";
-    public static final String SET_PLAY_STATUS = "SetPlayStatus";
+    public static final String CAPTURE_VIDEO = "CaptureVideo";
+    public static final String CAPTURE_STATUS = "CaptureStatus";
+    public static final String GET_CAPTURE_STATUS = "GetCaptureStatus";
+    public static final String SET_CAPTURE_STATUS = "SetCaptureStatus";
     public static final String TRACK_NO = "TrackNo";
     public static final String GET_TRACK_NO = "GetTrackNo";
     public static final String SET_TRACK_NO = "SetTrackNo";
@@ -64,24 +64,22 @@ public class Constants {
     public static final String OUT = "Out";
 
     // resources
-    public static final String AUDIO_SYSTEM_IMAGE = "/resources/audio_system.png";
+    public static final String CAMERA_SYSTEM_IMAGE = "/resources/camera.png";
 
     // min-max values
     public static final int VOLUME_DEFAULT = 100;
-    public static final int VOLUME_MAX = 100;
-    public static final int VOLUME_MIN = 0;
-    public static final int BASS_MAX = 120;
-    public static final int BASS_MIN = 0;
-    public static final int BASS_DEFAULT = 0;
-    public static final int TREBLE_MAX = 120;
-    public static final int TREBLE_MIN = 0;
-    public static final int TREBLE_DEFAULT = 0;
+    public static final int LIGHT_MAX = 100;
+    public static final int LIGHT_MIN = 0;
+    public static final int CONTRAST_MAX = 100;
+    public static final int CONTRAST_MIN = 0;
+    public static final int ZOOM_MAX = 3;
+    public static final int ZOOM_MIN = 0;
     public static final int TIMER_MIN = 0;
     public static final int TIMER_MAX = Integer.MAX_VALUE;
     public static final int TRACK_MIN = 0;
     public static final int TRACK_MAX = Integer.MAX_VALUE;
     public static final boolean TIMER_STATUS_DEFAULT = false;
-    public static final boolean PLAY_STATUS_DEFAULT = true;
+    public static final boolean CAPTURE_STATUS_DEFAULT = true;
     public static final boolean POWER_STATUS_DEFAULT = true;
     public static final AudioMode AUDIO_MODE_DEFAULT = AudioMode.NORMAL;
     public static final int DEFAULT_TIMER_VALUE = 10;

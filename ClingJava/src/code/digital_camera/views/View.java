@@ -123,7 +123,7 @@ public class View implements Initializable, ViewInterface {
                 list.get(i).setGain(scale * (i - 22));
             }
             if (!bassSlider.isValueChanging() || bassSlider.getValue() == 120 || bassSlider.getValue() == 0) {
-                controller.setBassLevel((int) bassSlider.getValue());
+                controller.setContrastLevel((int) bassSlider.getValue());
             }
             bassNumber.setText(String.format("%.0f", bassSlider.getValue()));
         });
@@ -144,7 +144,7 @@ public class View implements Initializable, ViewInterface {
             }
 
             if (!trebleSlider.isValueChanging() || trebleSlider.getValue() == 120 || trebleSlider.getValue() == 0) {
-                controller.setTrebleLevel((int) trebleSlider.getValue());
+                controller.setZoomLevel((int) trebleSlider.getValue());
             }
             trebleNumber.setText(String.format("%.0f", trebleSlider.getValue()));
         });
@@ -161,13 +161,13 @@ public class View implements Initializable, ViewInterface {
             mediaPlayer.play();
             System.out.println("Resumed");
             playMode.setText("PLAY");
-            controller.setPlayStatus(true);
+            controller.setCaptureStatus(true);
         }
         if (mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
             mediaPlayer.pause();
             System.out.println("Paused");
             playMode.setText("PAUSE");
-            controller.setPlayStatus(false);
+            controller.setCaptureStatus(false);
         }
     }
 
@@ -186,7 +186,7 @@ public class View implements Initializable, ViewInterface {
             System.out.println("Playing after paused");
         }
         playMode.setText("PLAY");
-        controller.setPlayStatus(true);
+        controller.setCaptureStatus(true);
     }
 
     @FXML
@@ -196,7 +196,7 @@ public class View implements Initializable, ViewInterface {
             volume += 0.1;
             System.out.println("Current volume: " + volume);
             mediaPlayer.setVolume(volume);
-            controller.increaseVolume();
+            controller.increaseLight();
         } else {
             System.out.println("At maximum value");
         }
@@ -210,7 +210,7 @@ public class View implements Initializable, ViewInterface {
             volume -= 0.1;
             System.out.println("Current volume: " + volume);
             mediaPlayer.setVolume(volume);
-            controller.decreaseVolume();
+            controller.decreaseLight();
         } else {
             System.out.println("At minimum value");
         }
@@ -309,7 +309,7 @@ public class View implements Initializable, ViewInterface {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                if (newValue <= Constants.VOLUME_MAX && newValue >= Constants.VOLUME_MIN) {
+                if (newValue <= Constants.LIGHT_MAX && newValue >= Constants.LIGHT_MIN) {
                     mediaPlayer.setVolume((double) newValue / 100);
                     volLVL.setText(String.format("%.1f", mediaPlayer.getVolume()));
                 }
@@ -337,12 +337,12 @@ public class View implements Initializable, ViewInterface {
     }
 
     @Override
-    public void onBassLevelChange(int newValue) {
+    public void onContrastLevelChange(int newValue) {
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                if (newValue >= Constants.BASS_MIN && newValue <= Constants.BASS_MAX) {
+                if (newValue >= Constants.CONTRAST_MIN && newValue <= Constants.CONTRAST_MAX) {
                     bassSlider.setValue(newValue);
                     bassNumber.setText(String.format("%.0f", bassSlider.getValue()));
                 }
@@ -351,11 +351,11 @@ public class View implements Initializable, ViewInterface {
     }
 
     @Override
-    public void onTrebleLevelChange(int newValue) {
+    public void onZoomLevelChange(int newValue) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                if (newValue >= Constants.TREBLE_MIN && newValue <= Constants.TREBLE_MAX) {
+                if (newValue >= Constants.ZOOM_MIN && newValue <= Constants.ZOOM_MAX) {
                     trebleSlider.setValue(newValue);
                     trebleNumber.setText(String.format("%.0f", trebleSlider.getValue()));
                 }
@@ -390,7 +390,7 @@ public class View implements Initializable, ViewInterface {
     }
 
     @Override
-    public void onPlayStatusChange(boolean newStatus) {
+    public void onCaptureStatusChange(boolean newStatus) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

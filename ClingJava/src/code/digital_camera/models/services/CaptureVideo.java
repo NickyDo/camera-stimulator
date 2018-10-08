@@ -6,8 +6,8 @@ import code.digital_camera.Constants;
 import java.beans.PropertyChangeSupport;
 
 @UpnpService(
-        serviceId = @UpnpServiceId(Constants.PLAY_MUSIC),
-        serviceType = @UpnpServiceType(value = Constants.PLAY_MUSIC, version = 1)
+        serviceId = @UpnpServiceId(Constants.CAPTURE_VIDEO),
+        serviceType = @UpnpServiceType(value = Constants.CAPTURE_VIDEO, version = 1)
 )
 //@UpnpStateVariables(
 //        {
@@ -22,14 +22,14 @@ import java.beans.PropertyChangeSupport;
 //                )
 //        }
 //)
-public class PlayMusic {
+public class CaptureVideo {
 
     private final PropertyChangeSupport propertyChangeSupport;
 
     @UpnpStateVariable(
             defaultValue = "0"
     )
-    private boolean playStatus;
+    private boolean captureStatus;
 
     @UpnpStateVariable(
             defaultValue = "0"
@@ -51,7 +51,7 @@ public class PlayMusic {
     private int timerValue;
 
 
-    public PlayMusic() {
+    public CaptureVideo() {
         this.propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
@@ -60,15 +60,15 @@ public class PlayMusic {
     }
 
     @UpnpAction(out = @UpnpOutputArgument(name = Constants.OUT))
-    public boolean getPlayStatus() {
-        return playStatus;
+    public boolean getCaptureStatus() {
+        return captureStatus;
     }
 
     @UpnpAction
-    public void setPlayStatus(@UpnpInputArgument(name = Constants.IN) boolean playStatus) {
-        if (playStatus != this.playStatus) {
-            this.playStatus = playStatus;
-            getPropertyChangeSupport().firePropertyChange(Constants.PLAY_STATUS, null, null);
+    public void setCaptureStatus(@UpnpInputArgument(name = Constants.IN) boolean captureStatus) {
+        if (captureStatus != this.captureStatus) {
+            this.captureStatus = captureStatus;
+            getPropertyChangeSupport().firePropertyChange(Constants.CAPTURE_STATUS, null, null);
         }
     }
 

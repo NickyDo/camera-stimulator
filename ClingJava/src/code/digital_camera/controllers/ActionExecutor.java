@@ -37,7 +37,7 @@ public class ActionExecutor {
     }
 
     public void setVolume(UpnpService upnpService, Service service, int value) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_VOLUME));
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_LIGHT));
         getTargetInvocation.setInput(Constants.IN, value);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -56,8 +56,8 @@ public class ActionExecutor {
         );
     }
 
-    public void increaseVolume(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.INCREASE_VOLUME));
+    public void increaseLight(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.INCREASE_LIGHT));
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
 
@@ -75,8 +75,8 @@ public class ActionExecutor {
         );
     }
 
-    public void decreaseVolume(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.DECREASE_VOLUME));
+    public void decreaseLight(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.DECREASE_LIGHT));
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
 
@@ -94,8 +94,8 @@ public class ActionExecutor {
         );
     }
 
-    public void setBassLevel(UpnpService upnpService, Service service, int value) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_BASS_LEVEL));
+    public void setContrastLevel(UpnpService upnpService, Service service, int value) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_CONTRAST_LEVEL));
         getTargetInvocation.setInput(Constants.IN, value);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -114,8 +114,8 @@ public class ActionExecutor {
         );
     }
 
-    public void increaseBassLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.INCREASE_BASS_LEVEL));
+    public void increaseContrastLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.INCREASE_CONTRAST_LEVEL));
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
 
@@ -133,8 +133,8 @@ public class ActionExecutor {
         );
     }
 
-    public void decreaseBassLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.DECREASE_BASS_LEVEL));
+    public void decreaseContrastLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.DECREASE_CONTRAST_LEVEL));
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
 
@@ -152,8 +152,8 @@ public class ActionExecutor {
         );
     }
 
-    public void setTrebleLevel(UpnpService upnpService, Service service, int value) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_TREBLE_LEVEL));
+    public void setZoomLevel(UpnpService upnpService, Service service, int value) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_ZOOM_LEVEL));
         getTargetInvocation.setInput(Constants.IN, value);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -172,8 +172,8 @@ public class ActionExecutor {
         );
     }
 
-    public void increaseTrebleLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.INCREASE_TREBLE_LEVEL));
+    public void increaseZoomLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.INCREASE_ZOOM_LEVEL));
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
 
@@ -191,8 +191,8 @@ public class ActionExecutor {
         );
     }
 
-    public void decreaseTrebleLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.DECREASE_TREBLE_LEVEL));
+    public void decreaseZoomLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.DECREASE_ZOOM_LEVEL));
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
 
@@ -230,8 +230,8 @@ public class ActionExecutor {
         );
     }
 
-    public void setPlayStatus(UpnpService upnpService, Service service, boolean value) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_PLAY_STATUS));
+    public void setCaptureStatus(UpnpService upnpService, Service service, boolean value) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_CAPTURE_STATUS));
         getTargetInvocation.setInput(Constants.IN, value);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -350,7 +350,7 @@ public class ActionExecutor {
     }
 
     public void getVolume(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_VOLUME));
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_LIGHT));
         getTargetInvocation.getOutput(Constants.OUT);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -370,8 +370,8 @@ public class ActionExecutor {
         );
     }
 
-    public void getBassLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_BASS_LEVEL));
+    public void getContrastLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_CONTRAST_LEVEL));
         getTargetInvocation.getOutput(Constants.OUT);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -391,8 +391,8 @@ public class ActionExecutor {
         );
     }
 
-    public void getTrebleLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_TREBLE_LEVEL));
+    public void getZoomLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_ZOOM_LEVEL));
         getTargetInvocation.getOutput(Constants.OUT);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -400,8 +400,8 @@ public class ActionExecutor {
                     @Override
                     public void success(ActionInvocation invocation) {
                         assert invocation.getOutput().length == 0;
-                        int trebleLevel = (int) invocation.getOutput()[0].getValue();
-                        System.out.println("Current trebleLevel: " + trebleLevel);
+                        int zoomLevel = (int) invocation.getOutput()[0].getValue();
+                        System.out.println("Current zoomLevel: " + zoomLevel);
                     }
 
                     @Override
@@ -433,8 +433,8 @@ public class ActionExecutor {
         );
     }
 
-    public void getPlayStatus(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_PLAY_STATUS));
+    public void getCaptureStatus(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_CAPTURE_STATUS));
         getTargetInvocation.getOutput(Constants.OUT);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -442,8 +442,8 @@ public class ActionExecutor {
                     @Override
                     public void success(ActionInvocation invocation) {
                         assert invocation.getOutput().length == 0;
-                        boolean playStatus = (boolean) invocation.getOutput()[0].getValue();
-                        System.out.println("Current playStatus: " + playStatus);
+                        boolean captureStatus = (boolean) invocation.getOutput()[0].getValue();
+                        System.out.println("Current captureStatus: " + captureStatus);
                     }
 
                     @Override
@@ -463,8 +463,8 @@ public class ActionExecutor {
                     @Override
                     public void success(ActionInvocation invocation) {
                         assert invocation.getOutput().length == 0;
-                        boolean timerStatus = (boolean) invocation.getOutput()[0].getValue();
-                        System.out.println("Current timerStatus: " + timerStatus);
+                        boolean captureStatus = (boolean) invocation.getOutput()[0].getValue();
+                        System.out.println("Current captureStatus: " + captureStatus);
                     }
 
                     @Override
