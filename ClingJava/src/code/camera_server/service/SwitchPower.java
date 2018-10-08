@@ -1,4 +1,4 @@
-package code.camera_server;
+package code.camera_server.service;
 
 import org.fourthline.cling.binding.annotations.*;
 

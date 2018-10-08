@@ -1,5 +1,8 @@
 package code.camera_server;
 
+import code.camera_server.service.SwitchPower;
+import code.camera_server.service.SetFlash;
+import code.digital_camera.Constants;
 import org.fourthline.cling.UpnpService;
 import org.fourthline.cling.UpnpServiceImpl;
 import org.fourthline.cling.binding.LocalServiceBindingException;
@@ -52,7 +55,7 @@ public class CameraServer implements Runnable {
 
         DeviceDetails details = new DeviceDetails("Simple Camera",
                 new ManufacturerDetails("1918"),
-                new ModelDetails("Vib2k18", "A simple camera with on/off switch.", "v1"));
+                new ModelDetails(Constants.MODEL_DETAILS, "A simple camera with on/off switch.", "v1"));
 
         Icon icon = new Icon("image/jpg", 48, 48, 8, getClass().getResource("/resources/camera.png"));
 
@@ -60,11 +63,11 @@ public class CameraServer implements Runnable {
 
         switchPowerService.setManager(new DefaultServiceManager(switchPowerService, SwitchPower.class));
 
-        return new LocalDevice(identity, type, details, icon, switchPowerService);
+        LocalService<SetFlash> setFlashService = new AnnotationLocalServiceBinder().read(SetFlash.class);
 
-        // Several services can be bound to the same device:
-//        return new LocalDevice(identity, type, details, icon, new LocalService[]{switchPowerService, myOtherService});
-        //
+//        return new LocalDevice(identity, type, details, icon, switchPowerService);
+
+        return new LocalDevice(identity, type, details, icon, new LocalService[]{switchPowerService, setFlashService});
 
     }
 

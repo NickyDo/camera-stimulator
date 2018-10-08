@@ -1,5 +1,7 @@
 package code.camera_server;
 
+import code.digital_camera.Constants;
+import code.digital_camera.models.AudioMode;
 import org.fourthline.cling.UpnpService;
 import org.fourthline.cling.UpnpServiceImpl;
 import org.fourthline.cling.controlpoint.ActionCallback;
@@ -9,6 +11,7 @@ import org.fourthline.cling.model.gena.CancelReason;
 import org.fourthline.cling.model.gena.GENASubscription;
 import org.fourthline.cling.model.message.UpnpResponse;
 import org.fourthline.cling.model.message.header.STAllHeader;
+import org.fourthline.cling.model.meta.Device;
 import org.fourthline.cling.model.meta.RemoteDevice;
 import org.fourthline.cling.model.meta.Service;
 import org.fourthline.cling.model.state.StateVariableValue;
@@ -25,6 +28,7 @@ public class CameraClient implements Runnable {
 
     private static final int VIBRATING_PERIOD = 10;
     private static final int INITIAL_DELAY = 100;
+    private Device device;
 
     public static void main(String[] args) throws Exception {
         // Start a user thread that runs the UPnP stack
@@ -53,30 +57,21 @@ public class CameraClient implements Runnable {
 
     RegistryListener createRegistryListener(final UpnpService upnpService) {
         return new DefaultRegistryListener() {
-
-            ServiceId serviceId = new UDAServiceId("SwitchPower");
-
             @Override
-            public void remoteDeviceAdded(Registry registry, RemoteDevice device) {
-
-                Service switchPower;
-                if ((switchPower = device.findService(serviceId)) != null) {
-                    System.out.println("Service discovered: " + switchPower);
-                    Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new Runnable() {
-                        @Override
-                        public void run() {
-                            executeAction(upnpService, switchPower);
-                        }
-                    }, INITIAL_DELAY, VIBRATING_PERIOD, TimeUnit.SECONDS);
-                    upnpService.getControlPoint().execute(createSubscriptionCallBack(upnpService, switchPower));
+            public void remoteDeviceAdded(Registry registry, RemoteDevice remoteDevice) {
+                if (remoteDevice.getDetails().getModelDetails().getModelName().equals(Constants.MODEL_DETAILS)) {
+                    device = remoteDevice;
+                    System.out.println("Audio system detected.");
+                    upnpService.getControlPoint().execute(createPowerSwitchSubscriptionCallBack(getServiceById(device, "SwitchPower")));
+                    upnpService.getControlPoint().execute(createAudioControlSubscriptionCallBack(getServiceById(device, "SetFlash")));
                 }
             }
 
             @Override
-            public void remoteDeviceRemoved(Registry registry, RemoteDevice device) {
-                Service switchPower;
-                if ((switchPower = device.findService(serviceId)) != null) {
-                    System.out.println("Service disappeared: " + switchPower);
+            public void remoteDeviceRemoved(Registry registry, RemoteDevice remoteDevice) {
+                if (remoteDevice.getDetails().getModelDetails().getModelName().equals(Constants.MODEL_DETAILS)) {
+                    System.out.println("Audio system removed.");
+                    device = null;
                 }
             }
 
@@ -124,6 +119,93 @@ public class CameraClient implements Runnable {
             }
         };
     }
+
+    private SubscriptionCallback createPowerSwitchSubscriptionCallBack(Service service) {
+        return new SubscriptionCallback(service, Integer.MAX_VALUE) {
+            @Override
+            protected void failed(GENASubscription genaSubscription, UpnpResponse upnpResponse, Exception e, String s) {
+
+            }
+
+            @Override
+            protected void established(GENASubscription genaSubscription) {
+                System.out.println("Power switch subscription created.");
+//                setPowerStatus(Constants.POWER_STATUS_DEFAULT);
+            }
+
+            @Override
+            protected void ended(GENASubscription genaSubscription, CancelReason cancelReason, UpnpResponse upnpResponse) {
+
+            }
+
+            @Override
+            public void eventReceived(GENASubscription sub) {
+                System.out.println("Event: " + sub.getCurrentSequence().getValue());
+                Map<String, StateVariableValue> values = sub.getCurrentValues();
+                for (String key : values.keySet()) {
+                    System.out.println(key + " changed.");
+                }
+                if (values.containsKey(Constants.STATUS)) {
+                    boolean value = (boolean) values.get(Constants.STATUS).getValue();
+                    System.out.println("New value: " + value);
+                }
+            }
+
+            @Override
+            public void eventsMissed(GENASubscription sub, int numberOfMissedEvents) {
+                System.out.println("Missed events: " + numberOfMissedEvents);
+            }
+        };
+    }
+
+    private SubscriptionCallback createAudioControlSubscriptionCallBack(Service service) {
+        return new SubscriptionCallback(service, Integer.MAX_VALUE) {
+            @Override
+            protected void failed(GENASubscription genaSubscription, UpnpResponse upnpResponse, Exception e, String s) {
+
+            }
+
+            @Override
+            protected void established(GENASubscription genaSubscription) {
+                System.out.println("Audio control subscription created.");
+//                setVolume(Constants.VOLUME_DEFAULT);
+//                setMode(AudioMode.NORMAL);
+            }
+
+            @Override
+            protected void ended(GENASubscription genaSubscription, CancelReason cancelReason, UpnpResponse upnpResponse) {
+
+            }
+
+            @Override
+            public void eventReceived(GENASubscription sub) {
+                System.out.println("Event: " + sub.getCurrentSequence().getValue());
+                Map<String, StateVariableValue> values = sub.getCurrentValues();
+                for (String key : values.keySet()) {
+                    System.out.println(key + " changed.");
+                }
+                if (values.containsKey(Constants.VOLUME)) {
+                    int value = (int) values.get(Constants.VOLUME).getValue();
+                    System.out.println("New value: " + value);
+                } else if (values.containsKey(Constants.BASS_LEVEL)) {
+                    int value = (int) values.get(Constants.BASS_LEVEL).getValue();
+                    System.out.println("New value: " + value);
+                } else if (values.containsKey(Constants.TREBLE_LEVEL)) {
+                    int value = (int) values.get(Constants.TREBLE_LEVEL).getValue();
+                    System.out.println("New value: " + value);
+                } else if (values.containsKey(Constants.AUDIO_MODE)) {
+                    String value = (String) values.get(Constants.AUDIO_MODE).getValue();
+                    System.out.println("New value: " + value);
+                }
+            }
+
+            @Override
+            public void eventsMissed(GENASubscription sub, int numberOfMissedEvents) {
+                System.out.println("Missed events: " + numberOfMissedEvents);
+            }
+        };
+    }
+
 
     void executeAction(UpnpService upnpService, Service switchPowerService) {
 
@@ -219,5 +301,12 @@ public class CameraClient implements Runnable {
                 System.exit(1);
             }
         }
+    }
+
+    private Service getServiceById(Device device, String serviceId) {
+        if (device == null) {
+            return null;
+        }
+        return device.findService(new UDAServiceId(serviceId));
     }
 }
