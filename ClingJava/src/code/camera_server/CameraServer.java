@@ -13,11 +13,11 @@ import org.fourthline.cling.model.types.UDN;
 
 import java.io.IOException;
 
-public class SimpleVibratorServer implements Runnable {
+public class CameraServer implements Runnable {
 
     public static void main(String[] args) throws Exception {
         // Start a user thread that runs the UPnP stack
-        Thread serverThread = new Thread(new SimpleVibratorServer());
+        Thread serverThread = new Thread(new CameraServer());
         serverThread.setDaemon(false);
         serverThread.start();
     }
@@ -46,15 +46,15 @@ public class SimpleVibratorServer implements Runnable {
 
     LocalDevice createDevice() throws ValidationException, LocalServiceBindingException, IOException {
 
-        DeviceIdentity identity = new DeviceIdentity(UDN.uniqueSystemIdentifier("Demo Vibrator"));
+        DeviceIdentity identity = new DeviceIdentity(UDN.uniqueSystemIdentifier("Demo Camera"));
 
-        DeviceType type = new UDADeviceType("Vibrator", 1);
+        DeviceType type = new UDADeviceType("Camera", 1);
 
-        DeviceDetails details = new DeviceDetails("Simple Vibrator",
+        DeviceDetails details = new DeviceDetails("Simple Camera",
                 new ManufacturerDetails("1918"),
-                new ModelDetails("Vib2k18", "A simple vibrator with on/off switch.", "v1"));
+                new ModelDetails("Vib2k18", "A simple camera with on/off switch.", "v1"));
 
-        Icon icon = new Icon("image/jpg", 48, 48, 8, getClass().getResource("/resources/vibrator.jpg"));
+        Icon icon = new Icon("image/jpg", 48, 48, 8, getClass().getResource("/resources/camera.png"));
 
         LocalService<SwitchPower> switchPowerService = new AnnotationLocalServiceBinder().read(SwitchPower.class);
 

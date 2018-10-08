@@ -21,14 +21,14 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class SimpleVibratorClient implements Runnable {
+public class CameraClient implements Runnable {
 
     private static final int VIBRATING_PERIOD = 10;
     private static final int INITIAL_DELAY = 100;
 
     public static void main(String[] args) throws Exception {
         // Start a user thread that runs the UPnP stack
-        Thread clientThread = new Thread(new SimpleVibratorClient());
+        Thread clientThread = new Thread(new CameraClient());
         clientThread.setDaemon(false);
         clientThread.start();
 
@@ -136,7 +136,7 @@ public class SimpleVibratorClient implements Runnable {
                     @Override
                     public void success(ActionInvocation invocation) {
                         assert invocation.getOutput().length == 0;
-                        System.out.println("Successfully called get action!");
+                        System.out.println("Successfully called get services!");
                         ActionInvocation setTargetInvocation = new SetTargetActionInvocation(switchPowerService, !((boolean) invocation.getOutput()[0].getValue()));
                         upnpService.getControlPoint().execute(
                                 new ActionCallback(setTargetInvocation) {
@@ -145,7 +145,7 @@ public class SimpleVibratorClient implements Runnable {
                                     public void success(ActionInvocation actionInvocation) {
 
                                         assert invocation.getOutput().length == 0;
-                                        System.out.println("Successfully called set action!");
+                                        System.out.println("Successfully called set services!");
                                     }
 
                                     @Override
