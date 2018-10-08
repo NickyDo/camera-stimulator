@@ -24,22 +24,22 @@ public class SetFlash {
     private boolean target = false;
 
     @UpnpStateVariable(defaultValue = "0")
-    private boolean status = false;
+    private boolean flash = false;
 
     @UpnpAction
     public void setTarget(@UpnpInputArgument(name = "NewTargetValue") boolean newTargetValue) {
 
         boolean targetOldValue = target;
         target = newTargetValue;
-        boolean statusOldValue = status;
-        status = newTargetValue;
+        boolean statusOldValue = flash;
+        flash = newTargetValue;
 
         // These have no effect on the UPnP monitoring but it's JavaBean compliant
         getPropertyChangeSupport().firePropertyChange("target", targetOldValue, target);
-        getPropertyChangeSupport().firePropertyChange("status", statusOldValue, status);
+        getPropertyChangeSupport().firePropertyChange("flash", statusOldValue, flash);
 
         // This will send a UPnP event, it's the name of a state variable that triggers events
-        getPropertyChangeSupport().firePropertyChange("Status", statusOldValue, status);
+        getPropertyChangeSupport().firePropertyChange("Flash", statusOldValue, flash);
     }
 
     @UpnpAction(out = @UpnpOutputArgument(name = "RetTargetValue"))
@@ -47,8 +47,8 @@ public class SetFlash {
         return target;
     }
 
-    @UpnpAction(out = @UpnpOutputArgument(name = "ResultStatus"))
-    public boolean getStatus() {
-        return status;
+    @UpnpAction(out = @UpnpOutputArgument(name = "ResultFlash"))
+    public boolean getFlash() {
+        return flash;
     }
 }

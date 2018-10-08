@@ -53,9 +53,12 @@ public class CameraClient2 implements Runnable {
         }
     }
 
-    RegistryListener createRegistryListener(final UpnpService upnpService) {
-        return new DefaultRegistryListener() {
 
+    private void test(Service service) {
+
+    }
+    private RegistryListener createRegistryListener(final UpnpService upnpService) {
+        return new DefaultRegistryListener() {
             ServiceId serviceId = new UDAServiceId("SetFlash");
 
             @Override

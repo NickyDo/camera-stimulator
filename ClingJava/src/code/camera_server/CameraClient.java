@@ -62,8 +62,8 @@ public class CameraClient implements Runnable {
                 if (remoteDevice.getDetails().getModelDetails().getModelName().equals(Constants.MODEL_DETAILS)) {
                     device = remoteDevice;
                     System.out.println("Audio system detected.");
-                    upnpService.getControlPoint().execute(createPowerSwitchSubscriptionCallBack(getServiceById(device, "SwitchPower")));
-                    upnpService.getControlPoint().execute(createAudioControlSubscriptionCallBack(getServiceById(device, "SetFlash")));
+                    upnpService.getControlPoint().execute(createSubscriptionCallBack(getServiceById(device, "SwitchPower")));
+                    upnpService.getControlPoint().execute(createSubscriptionCallBack(getServiceById(device, "SetFlash")));
                 }
             }
 
@@ -84,43 +84,7 @@ public class CameraClient implements Runnable {
         };
     }
 
-    private SubscriptionCallback createSubscriptionCallBack(UpnpService upnpService, Service service) {
-        return new SubscriptionCallback(service, 600) {
-            @Override
-            protected void failed(GENASubscription genaSubscription, UpnpResponse upnpResponse, Exception e, String s) {
-
-            }
-
-            @Override
-            protected void established(GENASubscription genaSubscription) {
-
-            }
-
-            @Override
-            protected void ended(GENASubscription genaSubscription, CancelReason cancelReason, UpnpResponse upnpResponse) {
-
-            }
-
-            @Override
-            public void eventReceived(GENASubscription sub) {
-
-                System.out.println("Event: " + sub.getCurrentSequence().getValue());
-
-                Map<String, StateVariableValue> values = sub.getCurrentValues();
-                StateVariableValue status = values.get("Status");
-
-                System.out.println("Status is: " + status.toString());
-
-            }
-
-            @Override
-            public void eventsMissed(GENASubscription sub, int numberOfMissedEvents) {
-                System.out.println("Missed events: " + numberOfMissedEvents);
-            }
-        };
-    }
-
-    private SubscriptionCallback createPowerSwitchSubscriptionCallBack(Service service) {
+    private SubscriptionCallback createSubscriptionCallBack(Service service) {
         return new SubscriptionCallback(service, Integer.MAX_VALUE) {
             @Override
             protected void failed(GENASubscription genaSubscription, UpnpResponse upnpResponse, Exception e, String s) {
@@ -156,119 +120,6 @@ public class CameraClient implements Runnable {
                 System.out.println("Missed events: " + numberOfMissedEvents);
             }
         };
-    }
-
-    private SubscriptionCallback createAudioControlSubscriptionCallBack(Service service) {
-        return new SubscriptionCallback(service, Integer.MAX_VALUE) {
-            @Override
-            protected void failed(GENASubscription genaSubscription, UpnpResponse upnpResponse, Exception e, String s) {
-
-            }
-
-            @Override
-            protected void established(GENASubscription genaSubscription) {
-                System.out.println("Audio control subscription created.");
-//                setVolume(Constants.VOLUME_DEFAULT);
-//                setMode(AudioMode.NORMAL);
-            }
-
-            @Override
-            protected void ended(GENASubscription genaSubscription, CancelReason cancelReason, UpnpResponse upnpResponse) {
-
-            }
-
-            @Override
-            public void eventReceived(GENASubscription sub) {
-                System.out.println("Event: " + sub.getCurrentSequence().getValue());
-                Map<String, StateVariableValue> values = sub.getCurrentValues();
-                for (String key : values.keySet()) {
-                    System.out.println(key + " changed.");
-                }
-                if (values.containsKey(Constants.VOLUME)) {
-                    int value = (int) values.get(Constants.VOLUME).getValue();
-                    System.out.println("New value: " + value);
-                } else if (values.containsKey(Constants.BASS_LEVEL)) {
-                    int value = (int) values.get(Constants.BASS_LEVEL).getValue();
-                    System.out.println("New value: " + value);
-                } else if (values.containsKey(Constants.TREBLE_LEVEL)) {
-                    int value = (int) values.get(Constants.TREBLE_LEVEL).getValue();
-                    System.out.println("New value: " + value);
-                } else if (values.containsKey(Constants.AUDIO_MODE)) {
-                    String value = (String) values.get(Constants.AUDIO_MODE).getValue();
-                    System.out.println("New value: " + value);
-                }
-            }
-
-            @Override
-            public void eventsMissed(GENASubscription sub, int numberOfMissedEvents) {
-                System.out.println("Missed events: " + numberOfMissedEvents);
-            }
-        };
-    }
-
-
-    void executeAction(UpnpService upnpService, Service switchPowerService) {
-
-        ActionInvocation getTargetInvocation = new GetTargetActionInvocation(switchPowerService);
-
-        // Executes asynchronous in the background
-        upnpService.getControlPoint().execute(
-                new ActionCallback(getTargetInvocation) {
-
-                    @Override
-                    public void success(ActionInvocation invocation) {
-                        assert invocation.getOutput().length == 0;
-                        System.out.println("Successfully called get services!");
-                        ActionInvocation setTargetInvocation = new SetTargetActionInvocation(switchPowerService, !((boolean) invocation.getOutput()[0].getValue()));
-                        upnpService.getControlPoint().execute(
-                                new ActionCallback(setTargetInvocation) {
-
-                                    @Override
-                                    public void success(ActionInvocation actionInvocation) {
-
-                                        assert invocation.getOutput().length == 0;
-                                        System.out.println("Successfully called set services!");
-                                    }
-
-                                    @Override
-                                    public void failure(ActionInvocation actionInvocation, UpnpResponse upnpResponse, String s) {
-                                        System.err.println("Error when calling set");
-                                    }
-                                }
-                        );
-                    }
-
-                    @Override
-                    public void failure(ActionInvocation invocation, UpnpResponse operation, String defaultMsg) {
-                        System.err.println(defaultMsg);
-                    }
-                }
-        );
-//        new ActionCallback.Default(getTargetInvocation, upnpService.getControlPoint()).run();
-
-    }
-
-    void executeGetAction(UpnpService upnpService, Service switchPowerService) {
-
-        ActionInvocation getTargetInvocation = new GetTargetActionInvocation(switchPowerService);
-
-        // Executes asynchronous in the background
-        upnpService.getControlPoint().execute(
-                new ActionCallback(getTargetInvocation) {
-
-                    @Override
-                    public void success(ActionInvocation invocation) {
-                        assert invocation.getOutput().length == 0;
-                        System.out.println("Current vibrating status: " + (boolean) invocation.getOutput()[0].getValue());
-                    }
-
-                    @Override
-                    public void failure(ActionInvocation invocation, UpnpResponse operation, String defaultMsg) {
-                        System.err.println(defaultMsg);
-                    }
-                }
-        );
-
     }
 
     class SetTargetActionInvocation extends ActionInvocation {
