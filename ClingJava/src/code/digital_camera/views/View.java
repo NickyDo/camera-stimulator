@@ -161,13 +161,13 @@ public class View implements Initializable, ViewInterface {
             mediaPlayer.play();
             System.out.println("Resumed");
             playMode.setText("PLAY");
-            controller.setPlayStatus(true);
+            controller.setCaptureStatus(true);
         }
         if (mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
             mediaPlayer.pause();
             System.out.println("Paused");
             playMode.setText("PAUSE");
-            controller.setPlayStatus(false);
+            controller.setCaptureStatus(false);
         }
     }
 
@@ -186,7 +186,7 @@ public class View implements Initializable, ViewInterface {
             System.out.println("Playing after paused");
         }
         playMode.setText("PLAY");
-        controller.setPlayStatus(true);
+        controller.setCaptureStatus(true);
     }
 
     @FXML
@@ -390,7 +390,7 @@ public class View implements Initializable, ViewInterface {
     }
 
     @Override
-    public void onPlayStatusChange(boolean newStatus) {
+    public void onCaptureStatusChange(boolean newStatus) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

@@ -8,7 +8,7 @@ public interface ViewInterface {
     void onZoomLevelChange(int newValue);
     void onContrastLevelChange(int newValue);
     void onModeChange(AudioMode newMode);
-    void onPlayStatusChange(boolean newStatus);
+    void onCaptureStatusChange(boolean newStatus);
     void onTrackChange(int trackNo);
     void onTimerValueChange(int newValue);
     void onTimerStatusChange(boolean status);

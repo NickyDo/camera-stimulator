@@ -44,9 +44,9 @@ public class Constants {
 
     // play music service
     public static final String PLAY_MUSIC = "PlayMusic";
-    public static final String PLAY_STATUS = "PlayStatus";
-    public static final String GET_PLAY_STATUS = "GetPlayStatus";
-    public static final String SET_PLAY_STATUS = "SetPlayStatus";
+    public static final String CAPTURE_STATUS = "CaptureStatus";
+    public static final String GET_CAPTURE_STATUS = "GetCaptureStatus";
+    public static final String SET_CAPTURE_STATUS = "SetCaptureStatus";
     public static final String TRACK_NO = "TrackNo";
     public static final String GET_TRACK_NO = "GetTrackNo";
     public static final String SET_TRACK_NO = "SetTrackNo";
@@ -79,7 +79,7 @@ public class Constants {
     public static final int TRACK_MIN = 0;
     public static final int TRACK_MAX = Integer.MAX_VALUE;
     public static final boolean TIMER_STATUS_DEFAULT = false;
-    public static final boolean PLAY_STATUS_DEFAULT = true;
+    public static final boolean CAPTURE_STATUS_DEFAULT = true;
     public static final boolean POWER_STATUS_DEFAULT = true;
     public static final AudioMode AUDIO_MODE_DEFAULT = AudioMode.NORMAL;
     public static final int DEFAULT_TIMER_VALUE = 10;

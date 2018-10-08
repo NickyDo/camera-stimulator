@@ -13,7 +13,7 @@ public interface ControllerInterface {
     boolean increaseContrastLevel();
     boolean decreaseContrastLevel();
     boolean setMode(AudioMode mode);
-    boolean setPlayStatus(boolean status);
+    boolean setCaptureStatus(boolean status);
     boolean nextTrack();
     boolean prevTrack();
     boolean setTimerValue(int value);

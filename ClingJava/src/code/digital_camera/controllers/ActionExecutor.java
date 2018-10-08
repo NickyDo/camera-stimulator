@@ -230,8 +230,8 @@ public class ActionExecutor {
         );
     }
 
-    public void setPlayStatus(UpnpService upnpService, Service service, boolean value) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_PLAY_STATUS));
+    public void setCaptureStatus(UpnpService upnpService, Service service, boolean value) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_CAPTURE_STATUS));
         getTargetInvocation.setInput(Constants.IN, value);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -433,8 +433,8 @@ public class ActionExecutor {
         );
     }
 
-    public void getPlayStatus(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_PLAY_STATUS));
+    public void getCaptureStatus(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_CAPTURE_STATUS));
         getTargetInvocation.getOutput(Constants.OUT);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -442,8 +442,8 @@ public class ActionExecutor {
                     @Override
                     public void success(ActionInvocation invocation) {
                         assert invocation.getOutput().length == 0;
-                        boolean playStatus = (boolean) invocation.getOutput()[0].getValue();
-                        System.out.println("Current playStatus: " + playStatus);
+                        boolean captureStatus = (boolean) invocation.getOutput()[0].getValue();
+                        System.out.println("Current captureStatus: " + captureStatus);
                     }
 
                     @Override
@@ -463,8 +463,8 @@ public class ActionExecutor {
                     @Override
                     public void success(ActionInvocation invocation) {
                         assert invocation.getOutput().length == 0;
-                        boolean timerStatus = (boolean) invocation.getOutput()[0].getValue();
-                        System.out.println("Current timerStatus: " + timerStatus);
+                        boolean captureStatus = (boolean) invocation.getOutput()[0].getValue();
+                        System.out.println("Current captureStatus: " + captureStatus);
                     }
 
                     @Override

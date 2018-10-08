@@ -77,7 +77,7 @@ public class Controller implements ControllerInterface {
                     public void run() {
                         setPowerStatus(Constants.POWER_STATUS_DEFAULT);
                         setVolume(Constants.VOLUME_DEFAULT);
-                        setPlayStatus(Constants.PLAY_STATUS_DEFAULT);
+                        setCaptureStatus(Constants.CAPTURE_STATUS_DEFAULT);
                         setMode(AudioMode.NORMAL);
                     }
                 }, 500, TimeUnit.MILLISECONDS);
@@ -176,9 +176,9 @@ public class Controller implements ControllerInterface {
                     boolean value = (boolean) values.get(Constants.STATUS).getValue();
                     view.onPowerStatusChange(value);
 //                    if (!value) {
-//                        view.onPlayStatusChange(false);
+//                        view.onCaptureStatusChange(false);
 //                    }
-                    view.onPlayStatusChange(value);
+                    view.onCaptureStatusChange(value);
                     System.out.println("New value: " + value);
                 }
             }
@@ -252,7 +252,7 @@ public class Controller implements ControllerInterface {
             @Override
             protected void established(GENASubscription genaSubscription) {
                 System.out.println("Play music subscription created.");
-//                setPlayStatus(Constants.PLAY_STATUS_DEFAULT);
+//                setCaptureStatus(Constants.CAPTURE_STATUS_DEFAULT);
             }
 
             @Override
@@ -267,9 +267,9 @@ public class Controller implements ControllerInterface {
                 for (String key : values.keySet()) {
                     System.out.println(key + " changed.");
                 }
-                if (values.containsKey(Constants.PLAY_STATUS)) {
-                    boolean value = (boolean) values.get(Constants.PLAY_STATUS).getValue();
-                    view.onPlayStatusChange(value);
+                if (values.containsKey(Constants.CAPTURE_STATUS)) {
+                    boolean value = (boolean) values.get(Constants.CAPTURE_STATUS).getValue();
+                    view.onCaptureStatusChange(value);
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.TIMER_STATUS)) {
                     boolean value = (boolean) values.get(Constants.TIMER_STATUS).getValue();
@@ -283,7 +283,7 @@ public class Controller implements ControllerInterface {
                 } else if (values.containsKey(Constants.TRACK_NO)) {
                     int value = (int) values.get(Constants.TRACK_NO).getValue();
                     view.onTrackChange(value);
-                    view.onPlayStatusChange(true);
+                    view.onCaptureStatusChange(true);
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.TIMER_VALUE)) {
                     int value = (int) values.get(Constants.TIMER_VALUE).getValue();
@@ -314,7 +314,7 @@ public class Controller implements ControllerInterface {
                                 @Override
                                 public void run() {
                                     actionExecutor.setTimerStatus(upnpService, service, false);
-                                    actionExecutor.setPlayStatus(upnpService, service, false);
+                                    actionExecutor.setCaptureStatus(upnpService, service, false);
                                 }
                             }, timerValue, TimeUnit.MINUTES);
                                                     }
@@ -342,7 +342,7 @@ public class Controller implements ControllerInterface {
             if (!status) {
                 Service playMusicService = getServiceById(device, Constants.PLAY_MUSIC);
                 if (playMusicService != null) {
-                    actionExecutor.setPlayStatus(upnpService, playMusicService, false);
+                    actionExecutor.setCaptureStatus(upnpService, playMusicService, false);
                 }
             }
         }
@@ -439,7 +439,7 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public boolean setPlayStatus(boolean status) {
+    public boolean setCaptureStatus(boolean status) {
         Service service = getServiceById(device, Constants.SWITCH_POWER);
         if (service != null) {
             ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_TARGET));
@@ -453,7 +453,7 @@ public class Controller implements ControllerInterface {
                             if (powerStatus) {
                                 Service service = getServiceById(device, Constants.PLAY_MUSIC);
                                 if (service != null) {
-                                    actionExecutor.setPlayStatus(upnpService, service, status);
+                                    actionExecutor.setCaptureStatus(upnpService, service, status);
                                 }
                             }
                         }
@@ -473,7 +473,7 @@ public class Controller implements ControllerInterface {
         Service service = getServiceById(device, Constants.PLAY_MUSIC);
         if (service != null) {
             actionExecutor.nextTrack(upnpService, service);
-            actionExecutor.setPlayStatus(upnpService, service, true);
+            actionExecutor.setCaptureStatus(upnpService, service, true);
         }
         return true;
     }
@@ -483,7 +483,7 @@ public class Controller implements ControllerInterface {
         Service service = getServiceById(device, Constants.PLAY_MUSIC);
         if (service != null) {
             actionExecutor.prevTrack(upnpService, service);
-            actionExecutor.setPlayStatus(upnpService, service, true);
+            actionExecutor.setCaptureStatus(upnpService, service, true);
         }
         return true;
     }
