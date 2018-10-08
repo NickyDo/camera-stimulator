@@ -9,9 +9,9 @@ public interface ControllerInterface {
     boolean setTrebleLevel(int value);
     boolean increaseTrebleLevel();
     boolean decreaseTrebleLevel();
-    boolean setBassLevel(int value);
-    boolean increaseBassLevel();
-    boolean decreaseBassLevel();
+    boolean setContrastLevel(int value);
+    boolean increaseContrastLevel();
+    boolean decreaseContrastLevel();
     boolean setMode(AudioMode mode);
     boolean setPlayStatus(boolean status);
     boolean nextTrack();

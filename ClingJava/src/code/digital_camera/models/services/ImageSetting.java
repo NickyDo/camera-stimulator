@@ -35,11 +35,11 @@ public class ImageSetting {
     private int light;
 
     @UpnpStateVariable(
-            defaultValue = "0",
-            allowedValueMinimum = Constants.BASS_MIN,
-            allowedValueMaximum = Constants.BASS_MAX
+            defaultValue = "50",
+            allowedValueMinimum = Constants.CONTRAST_MIN,
+            allowedValueMaximum = Constants.CONTRAST_MAX
     )
-    private int bassLevel;
+    private int contrastLevel;
 
     @UpnpStateVariable(
             defaultValue = "0",
@@ -93,31 +93,31 @@ public class ImageSetting {
     }
 
     @UpnpAction(out = @UpnpOutputArgument(name = Constants.OUT))
-    public int getBassLevel() {
-        return bassLevel;
+    public int getContrastLevel() {
+        return contrastLevel;
     }
 
     @UpnpAction
-    public void setBassLevel(@UpnpInputArgument(name = Constants.IN) int bassLevel) {
-        if (bassLevel >= Constants.BASS_MIN && bassLevel <= Constants.BASS_MAX) {
-            this.bassLevel = bassLevel;
-            getPropertyChangeSupport().firePropertyChange(Constants.BASS_LEVEL, null, null);
+    public void setContrastLevel(@UpnpInputArgument(name = Constants.IN) int contrastLevel) {
+        if (contrastLevel >= Constants.CONTRAST_MIN && contrastLevel <= Constants.CONTRAST_MAX) {
+            this.contrastLevel = contrastLevel;
+            getPropertyChangeSupport().firePropertyChange(Constants.CONTRAST_LEVEL, null, null);
         }
     }
 
     @UpnpAction
-    public void increaseBassLevel() {
-        if (bassLevel + 1 <= Constants.BASS_MAX) {
-            bassLevel++;
-            getPropertyChangeSupport().firePropertyChange(Constants.BASS_LEVEL, null, null);
+    public void increaseContrastLevel() {
+        if (contrastLevel + 1 <= Constants.CONTRAST_MAX) {
+            contrastLevel++;
+            getPropertyChangeSupport().firePropertyChange(Constants.CONTRAST_LEVEL, null, null);
         }
     }
 
     @UpnpAction
-    public void decreaseBassLevel() {
-        if (bassLevel - 1 >= Constants.BASS_MIN) {
-            bassLevel--;
-            getPropertyChangeSupport().firePropertyChange(Constants.BASS_LEVEL, null, null);
+    public void decreaseContrastLevel() {
+        if (contrastLevel - 1 >= Constants.CONTRAST_MIN) {
+            contrastLevel--;
+            getPropertyChangeSupport().firePropertyChange(Constants.CONTRAST_LEVEL, null, null);
         }
     }
 

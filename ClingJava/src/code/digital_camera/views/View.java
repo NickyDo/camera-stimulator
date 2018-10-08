@@ -123,7 +123,7 @@ public class View implements Initializable, ViewInterface {
                 list.get(i).setGain(scale * (i - 22));
             }
             if (!bassSlider.isValueChanging() || bassSlider.getValue() == 120 || bassSlider.getValue() == 0) {
-                controller.setBassLevel((int) bassSlider.getValue());
+                controller.setContrastLevel((int) bassSlider.getValue());
             }
             bassNumber.setText(String.format("%.0f", bassSlider.getValue()));
         });
@@ -337,12 +337,12 @@ public class View implements Initializable, ViewInterface {
     }
 
     @Override
-    public void onBassLevelChange(int newValue) {
+    public void onContrastLevelChange(int newValue) {
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                if (newValue >= Constants.BASS_MIN && newValue <= Constants.BASS_MAX) {
+                if (newValue >= Constants.CONTRAST_MIN && newValue <= Constants.CONTRAST_MAX) {
                     bassSlider.setValue(newValue);
                     bassNumber.setText(String.format("%.0f", bassSlider.getValue()));
                 }

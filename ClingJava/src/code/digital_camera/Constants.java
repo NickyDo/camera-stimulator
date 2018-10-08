@@ -28,11 +28,11 @@ public class Constants {
     public static final String SET_LIGHT = "SetLight";
     public static final String INCREASE_LIGHT = "IncreaseLight";
     public static final String DECREASE_LIGHT = "DecreaseLight";
-    public static final String BASS_LEVEL = "BassLevel";
-    public static final String GET_BASS_LEVEL = "GetBassLevel";
-    public static final String SET_BASS_LEVEL = "SetBassLevel";
-    public static final String INCREASE_BASS_LEVEL = "IncreaseBassLevel";
-    public static final String DECREASE_BASS_LEVEL = "DecreaseBassLevel";
+    public static final String CONTRAST_LEVEL = "ContrastLevel";
+    public static final String GET_CONTRAST_LEVEL = "GetContrastLevel";
+    public static final String SET_CONTRAST_LEVEL = "SetContrastLevel";
+    public static final String INCREASE_CONTRAST_LEVEL = "IncreaseContrastLevel";
+    public static final String DECREASE_CONTRAST_LEVEL = "DecreaseContrastLevel";
     public static final String TREBLE_LEVEL = "TrebleLevel";
     public static final String GET_TREBLE_LEVEL = "GetTrebleLevel";
     public static final String SET_TREBLE_LEVEL = "SetTrebleLevel";
@@ -70,8 +70,8 @@ public class Constants {
     public static final int VOLUME_DEFAULT = 100;
     public static final int LIGHT_MAX = 100;
     public static final int LIGHT_MIN = 0;
-    public static final int BASS_MAX = 120;
-    public static final int BASS_MIN = 0;
+    public static final int CONTRAST_MAX = 100;
+    public static final int CONTRAST_MIN = 0;
     public static final int BASS_DEFAULT = 0;
     public static final int TREBLE_MAX = 120;
     public static final int TREBLE_MIN = 0;

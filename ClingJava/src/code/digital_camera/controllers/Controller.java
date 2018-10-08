@@ -220,9 +220,9 @@ public class Controller implements ControllerInterface {
                     int value = (int) values.get(Constants.LIGHT).getValue();
                     view.onVolumeChange(value);
                     System.out.println("New value: " + value);
-                } else if (values.containsKey(Constants.BASS_LEVEL)) {
-                    int value = (int) values.get(Constants.BASS_LEVEL).getValue();
-                    view.onBassLevelChange(value);
+                } else if (values.containsKey(Constants.CONTRAST_LEVEL)) {
+                    int value = (int) values.get(Constants.CONTRAST_LEVEL).getValue();
+                    view.onContrastLevelChange(value);
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.TREBLE_LEVEL)) {
                     int value = (int) values.get(Constants.TREBLE_LEVEL).getValue();
@@ -403,28 +403,28 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public boolean setBassLevel(int value) {
+    public boolean setContrastLevel(int value) {
         Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
-            actionExecutor.setBassLevel(upnpService, service, value);
+            actionExecutor.setContrastLevel(upnpService, service, value);
         }
         return true;
     }
 
     @Override
-    public boolean increaseBassLevel() {
+    public boolean increaseContrastLevel() {
         Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
-            actionExecutor.increaseBassLevel(upnpService, service);
+            actionExecutor.increaseContrastLevel(upnpService, service);
         }
         return true;
     }
 
     @Override
-    public boolean decreaseBassLevel() {
+    public boolean decreaseContrastLevel() {
         Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
-            actionExecutor.decreaseBassLevel(upnpService, service);
+            actionExecutor.decreaseContrastLevel(upnpService, service);
         }
         return true;
     }

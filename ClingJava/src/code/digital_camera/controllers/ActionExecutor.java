@@ -94,8 +94,8 @@ public class ActionExecutor {
         );
     }
 
-    public void setBassLevel(UpnpService upnpService, Service service, int value) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_BASS_LEVEL));
+    public void setContrastLevel(UpnpService upnpService, Service service, int value) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_CONTRAST_LEVEL));
         getTargetInvocation.setInput(Constants.IN, value);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
@@ -114,8 +114,8 @@ public class ActionExecutor {
         );
     }
 
-    public void increaseBassLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.INCREASE_BASS_LEVEL));
+    public void increaseContrastLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.INCREASE_CONTRAST_LEVEL));
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
 
@@ -133,8 +133,8 @@ public class ActionExecutor {
         );
     }
 
-    public void decreaseBassLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.DECREASE_BASS_LEVEL));
+    public void decreaseContrastLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.DECREASE_CONTRAST_LEVEL));
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {
 
@@ -370,8 +370,8 @@ public class ActionExecutor {
         );
     }
 
-    public void getBassLevel(UpnpService upnpService, Service service) {
-        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_BASS_LEVEL));
+    public void getContrastLevel(UpnpService upnpService, Service service) {
+        ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.GET_CONTRAST_LEVEL));
         getTargetInvocation.getOutput(Constants.OUT);
         upnpService.getControlPoint().execute(
                 new ActionCallback(getTargetInvocation) {

@@ -1,7 +1,6 @@
 package code.camera_server;
 
 import code.digital_camera.Constants;
-import code.digital_camera.models.AudioMode;
 import org.fourthline.cling.UpnpService;
 import org.fourthline.cling.UpnpServiceImpl;
 import org.fourthline.cling.controlpoint.ActionCallback;
@@ -21,8 +20,6 @@ import org.fourthline.cling.registry.Registry;
 import org.fourthline.cling.registry.RegistryListener;
 
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class CameraClient implements Runnable {
 
@@ -184,11 +181,11 @@ public class CameraClient implements Runnable {
                 for (String key : values.keySet()) {
                     System.out.println(key + " changed.");
                 }
-                if (values.containsKey(Constants.VOLUME)) {
-                    int value = (int) values.get(Constants.VOLUME).getValue();
+                if (values.containsKey(Constants.CONTRAST_LEVEL)) {
+                    int value = (int) values.get(Constants.CONTRAST_LEVEL).getValue();
                     System.out.println("New value: " + value);
-                } else if (values.containsKey(Constants.BASS_LEVEL)) {
-                    int value = (int) values.get(Constants.BASS_LEVEL).getValue();
+                } else if (values.containsKey(Constants.CONTRAST_LEVEL)) {
+                    int value = (int) values.get(Constants.CONTRAST_LEVEL).getValue();
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.TREBLE_LEVEL)) {
                     int value = (int) values.get(Constants.TREBLE_LEVEL).getValue();
