@@ -43,7 +43,7 @@ public class Constants {
     public static final String SET_AUDIO_MODE = "SetAudioMode";
 
     // play music service
-    public static final String PLAY_MUSIC = "PlayMusic";
+    public static final String CAPTURE_VIDEO = "CaptureVideo";
     public static final String CAPTURE_STATUS = "CaptureStatus";
     public static final String GET_CAPTURE_STATUS = "GetCaptureStatus";
     public static final String SET_CAPTURE_STATUS = "SetCaptureStatus";

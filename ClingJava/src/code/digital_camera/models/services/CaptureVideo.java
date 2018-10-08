@@ -6,8 +6,8 @@ import code.digital_camera.Constants;
 import java.beans.PropertyChangeSupport;
 
 @UpnpService(
-        serviceId = @UpnpServiceId(Constants.PLAY_MUSIC),
-        serviceType = @UpnpServiceType(value = Constants.PLAY_MUSIC, version = 1)
+        serviceId = @UpnpServiceId(Constants.CAPTURE_VIDEO),
+        serviceType = @UpnpServiceType(value = Constants.CAPTURE_VIDEO, version = 1)
 )
 //@UpnpStateVariables(
 //        {
@@ -22,7 +22,7 @@ import java.beans.PropertyChangeSupport;
 //                )
 //        }
 //)
-public class PlayMusic {
+public class CaptureVideo {
 
     private final PropertyChangeSupport propertyChangeSupport;
 
@@ -51,7 +51,7 @@ public class PlayMusic {
     private int timerValue;
 
 
-    public PlayMusic() {
+    public CaptureVideo() {
         this.propertyChangeSupport = new PropertyChangeSupport(this);
     }
 

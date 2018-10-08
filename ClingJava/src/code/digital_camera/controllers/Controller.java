@@ -25,7 +25,7 @@ import org.fourthline.cling.registry.RegistryListener;
 import code.digital_camera.Constants;
 import code.digital_camera.models.AudioMode;
 import code.digital_camera.models.services.ImageSetting;
-import code.digital_camera.models.services.PlayMusic;
+import code.digital_camera.models.services.CaptureVideo;
 import code.digital_camera.models.services.SwitchPower;
 import code.digital_camera.views.ViewInterface;
 
@@ -52,7 +52,7 @@ public class Controller implements ControllerInterface {
                 device = remoteDevice;
                 upnpService.getControlPoint().execute(createPowerSwitchSubscriptionCallBack(getServiceById(device, Constants.SWITCH_POWER)));
                 upnpService.getControlPoint().execute(createAudioControlSubscriptionCallBack(getServiceById(device, Constants.IMAGE_SETTING)));
-                upnpService.getControlPoint().execute(createPlayMusicSubscriptionCallBack(getServiceById(device, Constants.PLAY_MUSIC)));
+                upnpService.getControlPoint().execute(createCaptureVideoSubscriptionCallBack(getServiceById(device, Constants.CAPTURE_VIDEO)));
             }
         }
 
@@ -72,7 +72,7 @@ public class Controller implements ControllerInterface {
                 device = localDevice;
                 upnpService.getControlPoint().execute(createPowerSwitchSubscriptionCallBack(getServiceById(device, Constants.SWITCH_POWER)));
                 upnpService.getControlPoint().execute(createAudioControlSubscriptionCallBack(getServiceById(device, Constants.IMAGE_SETTING)));
-                upnpService.getControlPoint().execute(createPlayMusicSubscriptionCallBack(getServiceById(device, Constants.PLAY_MUSIC)));                Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
+                upnpService.getControlPoint().execute(createCaptureVideoSubscriptionCallBack(getServiceById(device, Constants.CAPTURE_VIDEO)));                Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
                     @Override
                     public void run() {
                         setPowerStatus(Constants.POWER_STATUS_DEFAULT);
@@ -134,15 +134,15 @@ public class Controller implements ControllerInterface {
         switchPowerService.setManager(new DefaultServiceManager(switchPowerService, SwitchPower.class));
         LocalService<ImageSetting> imageSettingService = new AnnotationLocalServiceBinder().read(ImageSetting.class);
         imageSettingService.setManager(new DefaultServiceManager(imageSettingService, ImageSetting.class));
-        LocalService<PlayMusic> playMusicService = new AnnotationLocalServiceBinder().read(PlayMusic.class);
-        playMusicService.setManager(new DefaultServiceManager(playMusicService, PlayMusic.class));
+        LocalService<CaptureVideo> captureVideoService = new AnnotationLocalServiceBinder().read(CaptureVideo.class);
+        captureVideoService.setManager(new DefaultServiceManager(captureVideoService, CaptureVideo.class));
 
         return new LocalDevice(
                 identity, type, details, icon,
                 new LocalService[]{
                         switchPowerService,
                         imageSettingService,
-                        playMusicService
+                        captureVideoService
                 }
         );
     }
@@ -242,7 +242,7 @@ public class Controller implements ControllerInterface {
         };
     }
 
-    private SubscriptionCallback createPlayMusicSubscriptionCallBack(Service service) {
+    private SubscriptionCallback createCaptureVideoSubscriptionCallBack(Service service) {
         return new SubscriptionCallback(service, Integer.MAX_VALUE) {
             @Override
             protected void failed(GENASubscription genaSubscription, UpnpResponse upnpResponse, Exception e, String s) {
@@ -340,9 +340,9 @@ public class Controller implements ControllerInterface {
         if (service != null) {
             actionExecutor.setPowerStatus(upnpService, service, status);
             if (!status) {
-                Service playMusicService = getServiceById(device, Constants.PLAY_MUSIC);
-                if (playMusicService != null) {
-                    actionExecutor.setCaptureStatus(upnpService, playMusicService, false);
+                Service captureVideoService = getServiceById(device, Constants.CAPTURE_VIDEO);
+                if (captureVideoService != null) {
+                    actionExecutor.setCaptureStatus(upnpService, captureVideoService, false);
                 }
             }
         }
@@ -451,7 +451,7 @@ public class Controller implements ControllerInterface {
                             assert invocation.getOutput().length == 0;
                             boolean powerStatus = (boolean) invocation.getOutput()[0].getValue();
                             if (powerStatus) {
-                                Service service = getServiceById(device, Constants.PLAY_MUSIC);
+                                Service service = getServiceById(device, Constants.CAPTURE_VIDEO);
                                 if (service != null) {
                                     actionExecutor.setCaptureStatus(upnpService, service, status);
                                 }
@@ -470,7 +470,7 @@ public class Controller implements ControllerInterface {
 
     @Override
     public boolean nextTrack() {
-        Service service = getServiceById(device, Constants.PLAY_MUSIC);
+        Service service = getServiceById(device, Constants.CAPTURE_VIDEO);
         if (service != null) {
             actionExecutor.nextTrack(upnpService, service);
             actionExecutor.setCaptureStatus(upnpService, service, true);
@@ -480,7 +480,7 @@ public class Controller implements ControllerInterface {
 
     @Override
     public boolean prevTrack() {
-        Service service = getServiceById(device, Constants.PLAY_MUSIC);
+        Service service = getServiceById(device, Constants.CAPTURE_VIDEO);
         if (service != null) {
             actionExecutor.prevTrack(upnpService, service);
             actionExecutor.setCaptureStatus(upnpService, service, true);
@@ -490,7 +490,7 @@ public class Controller implements ControllerInterface {
 
     @Override
     public boolean setTimerValue(int value) {
-        Service service = getServiceById(device, Constants.PLAY_MUSIC);
+        Service service = getServiceById(device, Constants.CAPTURE_VIDEO);
         if (service != null) {
             actionExecutor.setTimerValue(upnpService, service, value);
         }
@@ -499,7 +499,7 @@ public class Controller implements ControllerInterface {
 
     @Override
     public boolean setTimerStatus(boolean status) {
-        Service service = getServiceById(device, Constants.PLAY_MUSIC);
+        Service service = getServiceById(device, Constants.CAPTURE_VIDEO);
         if (service != null) {
             actionExecutor.setTimerStatus(upnpService, service, status);
             if (status) {
