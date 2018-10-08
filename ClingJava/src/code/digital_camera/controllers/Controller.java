@@ -178,7 +178,6 @@ public class Controller implements ControllerInterface {
 //                    if (!value) {
 //                        view.onPlayStatusChange(false);
 //                    }
-                    view.onPlayStatusChange(value);
                     System.out.println("New value: " + value);
                 }
             }
@@ -222,11 +221,9 @@ public class Controller implements ControllerInterface {
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.BASS_LEVEL)) {
                     int value = (int) values.get(Constants.BASS_LEVEL).getValue();
-                    view.onBassLevelChange(value);
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.TREBLE_LEVEL)) {
                     int value = (int) values.get(Constants.TREBLE_LEVEL).getValue();
-                    view.onTrebleLevelChange(value);
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.AUDIO_MODE)) {
                     String value = (String) values.get(Constants.AUDIO_MODE).getValue();
@@ -269,11 +266,10 @@ public class Controller implements ControllerInterface {
                 }
                 if (values.containsKey(Constants.PLAY_STATUS)) {
                     boolean value = (boolean) values.get(Constants.PLAY_STATUS).getValue();
-                    view.onPlayStatusChange(value);
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.TIMER_STATUS)) {
                     boolean value = (boolean) values.get(Constants.TIMER_STATUS).getValue();
-                    view.onTimerStatusChange(value);
+//                    view.onTimerStatusChange(value);
                     if (value) {
                         scheduleStop(service);
                     } else {
@@ -283,7 +279,6 @@ public class Controller implements ControllerInterface {
                 } else if (values.containsKey(Constants.TRACK_NO)) {
                     int value = (int) values.get(Constants.TRACK_NO).getValue();
                     view.onTrackChange(value);
-                    view.onPlayStatusChange(true);
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.TIMER_VALUE)) {
                     int value = (int) values.get(Constants.TIMER_VALUE).getValue();
