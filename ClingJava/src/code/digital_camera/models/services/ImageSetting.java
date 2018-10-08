@@ -7,8 +7,8 @@ import code.digital_camera.models.AudioMode;
 import java.beans.PropertyChangeSupport;
 
 @UpnpService(
-        serviceId = @UpnpServiceId(Constants.AUDIO_CONTROL),
-        serviceType = @UpnpServiceType(value = Constants.AUDIO_CONTROL, version = 1)
+        serviceId = @UpnpServiceId(Constants.IMAGE_SETTING),
+        serviceType = @UpnpServiceType(value = Constants.IMAGE_SETTING, version = 1)
 )
 //@UpnpStateVariables(
 //        {
@@ -23,16 +23,16 @@ import java.beans.PropertyChangeSupport;
 //                )
 //        }
 //)
-public class AudioControl {
+public class ImageSetting {
 
     private final PropertyChangeSupport propertyChangeSupport;
 
     @UpnpStateVariable(
-            defaultValue = "100",
-            allowedValueMinimum = Constants.VOLUME_MIN,
-            allowedValueMaximum = Constants.VOLUME_MAX
+            defaultValue = "50",
+            allowedValueMinimum = Constants.LIGHT_MIN,
+            allowedValueMaximum = Constants.LIGHT_MAX
     )
-    private int volume;
+    private int light;
 
     @UpnpStateVariable(
             defaultValue = "0",
@@ -55,7 +55,7 @@ public class AudioControl {
     private AudioMode audioMode;
 
 
-    public AudioControl() {
+    public ImageSetting() {
         this.propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
@@ -64,31 +64,31 @@ public class AudioControl {
     }
 
     @UpnpAction(out = @UpnpOutputArgument(name = Constants.OUT))
-    public int getVolume() {
-        return volume;
+    public int getLight() {
+        return light;
     }
 
     @UpnpAction
-    public void setVolume(@UpnpInputArgument(name = Constants.IN) int volume) {
-        if (volume >= Constants.VOLUME_MIN && volume <= Constants.VOLUME_MAX) {
-            this.volume = volume;
-            getPropertyChangeSupport().firePropertyChange(Constants.VOLUME, null, null);
+    public void setLight(@UpnpInputArgument(name = Constants.IN) int light) {
+        if (light >= Constants.LIGHT_MIN && light <= Constants.LIGHT_MAX) {
+            this.light = light;
+            getPropertyChangeSupport().firePropertyChange(Constants.LIGHT, null, null);
         }
     }
 
     @UpnpAction
-    public void increaseVolume() {
-        if (volume + 10 <= Constants.VOLUME_MAX) {
-            volume += 10;
-            getPropertyChangeSupport().firePropertyChange(Constants.VOLUME, null, null);
+    public void increaseLight() {
+        if (light + 10 <= Constants.LIGHT_MAX) {
+            light += 10;
+            getPropertyChangeSupport().firePropertyChange(Constants.LIGHT, null, null);
         }
     }
 
     @UpnpAction
-    public void decreaseVolume() {
-        if (volume - 10 >= Constants.VOLUME_MIN) {
-            volume -= 10;
-            getPropertyChangeSupport().firePropertyChange(Constants.VOLUME, null, null);
+    public void decreaseLight() {
+        if (light - 10 >= Constants.LIGHT_MIN) {
+            light -= 10;
+            getPropertyChangeSupport().firePropertyChange(Constants.LIGHT, null, null);
         }
     }
 

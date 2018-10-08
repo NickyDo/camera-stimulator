@@ -24,7 +24,7 @@ import org.fourthline.cling.registry.Registry;
 import org.fourthline.cling.registry.RegistryListener;
 import code.digital_camera.Constants;
 import code.digital_camera.models.AudioMode;
-import code.digital_camera.models.services.AudioControl;
+import code.digital_camera.models.services.ImageSetting;
 import code.digital_camera.models.services.PlayMusic;
 import code.digital_camera.models.services.SwitchPower;
 import code.digital_camera.views.ViewInterface;
@@ -51,7 +51,7 @@ public class Controller implements ControllerInterface {
                 System.out.println("Audio system detected.");
                 device = remoteDevice;
                 upnpService.getControlPoint().execute(createPowerSwitchSubscriptionCallBack(getServiceById(device, Constants.SWITCH_POWER)));
-                upnpService.getControlPoint().execute(createAudioControlSubscriptionCallBack(getServiceById(device, Constants.AUDIO_CONTROL)));
+                upnpService.getControlPoint().execute(createAudioControlSubscriptionCallBack(getServiceById(device, Constants.IMAGE_SETTING)));
                 upnpService.getControlPoint().execute(createPlayMusicSubscriptionCallBack(getServiceById(device, Constants.PLAY_MUSIC)));
             }
         }
@@ -71,7 +71,7 @@ public class Controller implements ControllerInterface {
                 System.out.println("Audio system detected.");
                 device = localDevice;
                 upnpService.getControlPoint().execute(createPowerSwitchSubscriptionCallBack(getServiceById(device, Constants.SWITCH_POWER)));
-                upnpService.getControlPoint().execute(createAudioControlSubscriptionCallBack(getServiceById(device, Constants.AUDIO_CONTROL)));
+                upnpService.getControlPoint().execute(createAudioControlSubscriptionCallBack(getServiceById(device, Constants.IMAGE_SETTING)));
                 upnpService.getControlPoint().execute(createPlayMusicSubscriptionCallBack(getServiceById(device, Constants.PLAY_MUSIC)));                Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
                     @Override
                     public void run() {
@@ -128,12 +128,12 @@ public class Controller implements ControllerInterface {
                 new ManufacturerDetails(Constants.MANUFACTURER_DETAILS),
                 new ModelDetails(Constants.MODEL_DETAILS, Constants.MODEL_DESCRIPTION, Constants.MODEL_NUMBER));
 
-        Icon icon = new Icon("image/png", 48, 48, 8, getClass().getResource(Constants.AUDIO_SYSTEM_IMAGE));
+        Icon icon = new Icon("image/png", 48, 48, 8, getClass().getResource(Constants.CAMERA_SYSTEM_IMAGE));
 
         LocalService<SwitchPower> switchPowerService = new AnnotationLocalServiceBinder().read(SwitchPower.class);
         switchPowerService.setManager(new DefaultServiceManager(switchPowerService, SwitchPower.class));
-        LocalService<AudioControl> audioControlService = new AnnotationLocalServiceBinder().read(AudioControl.class);
-        audioControlService.setManager(new DefaultServiceManager(audioControlService, AudioControl.class));
+        LocalService<ImageSetting> imageSettingService = new AnnotationLocalServiceBinder().read(ImageSetting.class);
+        imageSettingService.setManager(new DefaultServiceManager(imageSettingService, ImageSetting.class));
         LocalService<PlayMusic> playMusicService = new AnnotationLocalServiceBinder().read(PlayMusic.class);
         playMusicService.setManager(new DefaultServiceManager(playMusicService, PlayMusic.class));
 
@@ -141,7 +141,7 @@ public class Controller implements ControllerInterface {
                 identity, type, details, icon,
                 new LocalService[]{
                         switchPowerService,
-                        audioControlService,
+                        imageSettingService,
                         playMusicService
                 }
         );
@@ -200,7 +200,7 @@ public class Controller implements ControllerInterface {
             @Override
             protected void established(GENASubscription genaSubscription) {
                 System.out.println("Audio control subscription created.");
-//                setVolume(Constants.VOLUME_DEFAULT);
+//                setLight(Constants.VOLUME_DEFAULT);
 //                setMode(AudioMode.NORMAL);
             }
 
@@ -216,8 +216,8 @@ public class Controller implements ControllerInterface {
                 for (String key : values.keySet()) {
                     System.out.println(key + " changed.");
                 }
-                if (values.containsKey(Constants.VOLUME)) {
-                    int value = (int) values.get(Constants.VOLUME).getValue();
+                if (values.containsKey(Constants.LIGHT)) {
+                    int value = (int) values.get(Constants.LIGHT).getValue();
                     view.onVolumeChange(value);
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.BASS_LEVEL)) {
@@ -350,7 +350,7 @@ public class Controller implements ControllerInterface {
     }
 
     public boolean setVolume(int value) {
-        Service service = getServiceById(device, Constants.AUDIO_CONTROL);
+        Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
             actionExecutor.setVolume(upnpService, service, value);
         }
@@ -358,26 +358,26 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public boolean increaseVolume() {
-        Service service = getServiceById(device, Constants.AUDIO_CONTROL);
+    public boolean increaseLight() {
+        Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
-            actionExecutor.increaseVolume(upnpService, service);
+            actionExecutor.increaseLight(upnpService, service);
         }
         return true;
     }
 
     @Override
-    public boolean decreaseVolume() {
-        Service service = getServiceById(device, Constants.AUDIO_CONTROL);
+    public boolean decreaseLight() {
+        Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
-            actionExecutor.decreaseVolume(upnpService, service);
+            actionExecutor.decreaseLight(upnpService, service);
         }
         return true;
     }
 
     @Override
     public boolean setTrebleLevel(int value) {
-        Service service = getServiceById(device, Constants.AUDIO_CONTROL);
+        Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
             actionExecutor.setTrebleLevel(upnpService, service, value);
         }
@@ -386,7 +386,7 @@ public class Controller implements ControllerInterface {
 
     @Override
     public boolean increaseTrebleLevel() {
-        Service service = getServiceById(device, Constants.AUDIO_CONTROL);
+        Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
             actionExecutor.increaseTrebleLevel(upnpService, service);
         }
@@ -395,7 +395,7 @@ public class Controller implements ControllerInterface {
 
     @Override
     public boolean decreaseTrebleLevel() {
-        Service service = getServiceById(device, Constants.AUDIO_CONTROL);
+        Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
             actionExecutor.decreaseTrebleLevel(upnpService, service);
         }
@@ -404,7 +404,7 @@ public class Controller implements ControllerInterface {
 
     @Override
     public boolean setBassLevel(int value) {
-        Service service = getServiceById(device, Constants.AUDIO_CONTROL);
+        Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
             actionExecutor.setBassLevel(upnpService, service, value);
         }
@@ -413,7 +413,7 @@ public class Controller implements ControllerInterface {
 
     @Override
     public boolean increaseBassLevel() {
-        Service service = getServiceById(device, Constants.AUDIO_CONTROL);
+        Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
             actionExecutor.increaseBassLevel(upnpService, service);
         }
@@ -422,7 +422,7 @@ public class Controller implements ControllerInterface {
 
     @Override
     public boolean decreaseBassLevel() {
-        Service service = getServiceById(device, Constants.AUDIO_CONTROL);
+        Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
             actionExecutor.decreaseBassLevel(upnpService, service);
         }
@@ -431,7 +431,7 @@ public class Controller implements ControllerInterface {
 
     @Override
     public boolean setMode(AudioMode mode) {
-        Service service = getServiceById(device, Constants.AUDIO_CONTROL);
+        Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
             actionExecutor.setAudioMode(upnpService, service, mode);
         }

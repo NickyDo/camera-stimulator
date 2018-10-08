@@ -196,7 +196,7 @@ public class View implements Initializable, ViewInterface {
             volume += 0.1;
             System.out.println("Current volume: " + volume);
             mediaPlayer.setVolume(volume);
-            controller.increaseVolume();
+            controller.increaseLight();
         } else {
             System.out.println("At maximum value");
         }
@@ -210,7 +210,7 @@ public class View implements Initializable, ViewInterface {
             volume -= 0.1;
             System.out.println("Current volume: " + volume);
             mediaPlayer.setVolume(volume);
-            controller.decreaseVolume();
+            controller.decreaseLight();
         } else {
             System.out.println("At minimum value");
         }
@@ -309,7 +309,7 @@ public class View implements Initializable, ViewInterface {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                if (newValue <= Constants.VOLUME_MAX && newValue >= Constants.VOLUME_MIN) {
+                if (newValue <= Constants.LIGHT_MAX && newValue >= Constants.LIGHT_MIN) {
                     mediaPlayer.setVolume((double) newValue / 100);
                     volLVL.setText(String.format("%.1f", mediaPlayer.getVolume()));
                 }

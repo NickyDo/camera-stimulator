@@ -4,8 +4,8 @@ import code.digital_camera.models.AudioMode;
 
 public interface ControllerInterface {
     boolean setPowerStatus(boolean status);
-    boolean increaseVolume();
-    boolean decreaseVolume();
+    boolean increaseLight();
+    boolean decreaseLight();
     boolean setTrebleLevel(int value);
     boolean increaseTrebleLevel();
     boolean decreaseTrebleLevel();

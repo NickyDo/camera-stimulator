@@ -4,10 +4,10 @@ import code.digital_camera.models.AudioMode;
 
 public class Constants {
     // device
-    public static final String DEVICE_NAME = "AudioSystem";
+    public static final String DEVICE_NAME = "SmartCamera";
     public static final String MANUFACTURER_DETAILS = "1918";
-    public static final String MODEL_DETAILS = "AS2018";
-    public static final String MODEL_DESCRIPTION = "Simple Audio System";
+    public static final String MODEL_DETAILS = "SC2018";
+    public static final String MODEL_DESCRIPTION = "Smart Camera System";
     public static final String MODEL_NUMBER = "v1";
 
     // switch power service
@@ -22,12 +22,12 @@ public class Constants {
     public static final String RESULT_STATUS = "ResultStatus";
 
     // audio control service
-    public static final String AUDIO_CONTROL = "AudioControl";
-    public static final String VOLUME = "Volume";
-    public static final String GET_VOLUME = "GetVolume";
-    public static final String SET_VOLUME = "SetVolume";
-    public static final String INCREASE_VOLUME = "IncreaseVolume";
-    public static final String DECREASE_VOLUME = "DecreaseVolume";
+    public static final String IMAGE_SETTING = "ImageSetting";
+    public static final String LIGHT = "Light";
+    public static final String GET_LIGHT = "GetLight";
+    public static final String SET_LIGHT = "SetLight";
+    public static final String INCREASE_LIGHT = "IncreaseLight";
+    public static final String DECREASE_LIGHT = "DecreaseLight";
     public static final String BASS_LEVEL = "BassLevel";
     public static final String GET_BASS_LEVEL = "GetBassLevel";
     public static final String SET_BASS_LEVEL = "SetBassLevel";
@@ -64,12 +64,12 @@ public class Constants {
     public static final String OUT = "Out";
 
     // resources
-    public static final String AUDIO_SYSTEM_IMAGE = "/resources/audio_system.png";
+    public static final String CAMERA_SYSTEM_IMAGE = "/resources/camera.png";
 
     // min-max values
     public static final int VOLUME_DEFAULT = 100;
-    public static final int VOLUME_MAX = 100;
-    public static final int VOLUME_MIN = 0;
+    public static final int LIGHT_MAX = 100;
+    public static final int LIGHT_MIN = 0;
     public static final int BASS_MAX = 120;
     public static final int BASS_MIN = 0;
     public static final int BASS_DEFAULT = 0;
