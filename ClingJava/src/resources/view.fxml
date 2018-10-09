@@ -238,6 +238,13 @@
                 <GridPane style="-fx-background-image: ''" prefHeight="250.0" prefWidth="50.0"
                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="225.0"
                           AnchorPane.topAnchor="0.0">
+                    <ImageView fx:id="systemImg" fitHeight="100.0" fitWidth="100.0" layoutX="225.0" layoutY="1000.0"
+                               style="-fx-padding: 100 100 100 100" pickOnBounds="true" preserveRatio="true">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </ImageView>
+
                     <Label visible="false" fx:id="muted" prefHeight="50.0" prefWidth="100.0" text="NO"
                            GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <font>

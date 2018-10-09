@@ -1,6 +1,6 @@
 package code.digital_camera.models;
 
-public enum AudioMode {
+public enum CaptureMode {
     NORMAL,
     POP,
     ROCK,

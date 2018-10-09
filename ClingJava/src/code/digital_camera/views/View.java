@@ -1,5 +1,6 @@
 package code.digital_camera.views;
 
+import code.digital_camera.models.CaptureMode;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import code.digital_camera.Constants;
 import code.digital_camera.controllers.ControllerInterface;
-import code.digital_camera.models.AudioMode;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,11 +30,13 @@ public class View implements Initializable, ViewInterface {
     private static MediaPlayer mediaPlayer;
     private static Boolean isDeviceOn = true;
     private ControllerInterface controller;
-    private static AudioMode audioMode = AudioMode.NORMAL;
+    private static CaptureMode captureMode = CaptureMode.NORMAL;
     private static ArrayList<String> songs = null;
     private static int curSongIndx = 0;
     private static boolean isTimerOn = false;
 
+    @FXML
+    ImageView systemImg;
     @FXML
     ImageView powerBtn;
     @FXML
@@ -88,6 +90,7 @@ public class View implements Initializable, ViewInterface {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DrawButton drawButton = new DrawButton();
+        drawButton.draw(systemImg, "camera.png", 150, 150);
         drawButton.draw(powerBtn, "power.png", 50, 50);
         drawButton.draw(playBtn, "play.png", 50, 50);
         drawButton.draw(pauseBtn, "pause.png", 50, 50);
@@ -232,29 +235,29 @@ public class View implements Initializable, ViewInterface {
 
     @FXML
     public void handleNormalMode(MouseEvent event) {
-        audioMode = AudioMode.NORMAL;
+        captureMode = CaptureMode.NORMAL;
         normalMode.setFill(Color.DODGERBLUE);
         popMode.setFill(Color.WHITE);
         rockMode.setFill(Color.WHITE);
-        controller.setMode(audioMode);
+        controller.setMode(captureMode);
     }
 
     @FXML
     public void handlePopMode(MouseEvent event) {
-        audioMode = AudioMode.POP;
+        captureMode = CaptureMode.POP;
         normalMode.setFill(Color.WHITE);
         popMode.setFill(Color.DODGERBLUE);
         rockMode.setFill(Color.WHITE);
-        controller.setMode(audioMode);
+        controller.setMode(captureMode);
     }
 
     @FXML
     public void handleRockMode(MouseEvent event) {
-        audioMode = AudioMode.ROCK;
+        captureMode = CaptureMode.ROCK;
         normalMode.setFill(Color.WHITE);
         popMode.setFill(Color.WHITE);
         rockMode.setFill(Color.DODGERBLUE);
-        controller.setMode(audioMode);
+        controller.setMode(captureMode);
     }
 
     @FXML
@@ -364,25 +367,25 @@ public class View implements Initializable, ViewInterface {
     }
 
     @Override
-    public void onModeChange(AudioMode newMode) {
+    public void onModeChange(CaptureMode newMode) {
         switch (newMode) {
             case NORMAL:
                 normalMode.setFill(Color.DODGERBLUE);
                 popMode.setFill(Color.WHITE);
                 rockMode.setFill(Color.WHITE);
-                audioMode = newMode;
+                captureMode = newMode;
                 break;
             case POP:
                 normalMode.setFill(Color.WHITE);
                 popMode.setFill(Color.DODGERBLUE);
                 rockMode.setFill(Color.WHITE);
-                audioMode = newMode;
+                captureMode = newMode;
                 break;
             case ROCK:
                 normalMode.setFill(Color.WHITE);
                 popMode.setFill(Color.WHITE);
                 rockMode.setFill(Color.DODGERBLUE);
-                audioMode = newMode;
+                captureMode = newMode;
                 break;
             default:
                 break;

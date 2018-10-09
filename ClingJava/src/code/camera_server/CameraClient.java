@@ -166,7 +166,7 @@ public class CameraClient implements Runnable {
             protected void established(GENASubscription genaSubscription) {
                 System.out.println("Audio control subscription created.");
 //                setVolume(Constants.VOLUME_DEFAULT);
-//                setMode(AudioMode.NORMAL);
+//                setMode(CaptureMode.NORMAL);
             }
 
             @Override

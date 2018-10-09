@@ -1,12 +1,12 @@
 package code.digital_camera.controllers;
 
+import code.digital_camera.models.CaptureMode;
 import org.fourthline.cling.UpnpService;
 import org.fourthline.cling.controlpoint.ActionCallback;
 import org.fourthline.cling.model.action.ActionInvocation;
 import org.fourthline.cling.model.message.UpnpResponse;
 import org.fourthline.cling.model.meta.Service;
 import code.digital_camera.Constants;
-import code.digital_camera.models.AudioMode;
 
 public class ActionExecutor {
 
@@ -210,7 +210,7 @@ public class ActionExecutor {
         );
     }
 
-    public void setAudioMode(UpnpService upnpService, Service service, AudioMode value) {
+    public void setAudioMode(UpnpService upnpService, Service service, CaptureMode value) {
         ActionInvocation getTargetInvocation = new ActionInvocation(service.getAction(Constants.SET_AUDIO_MODE));
         getTargetInvocation.setInput(Constants.IN, value.toString());
         upnpService.getControlPoint().execute(
@@ -421,8 +421,8 @@ public class ActionExecutor {
                     @Override
                     public void success(ActionInvocation invocation) {
                         assert invocation.getOutput().length == 0;
-                        AudioMode audioMode = (AudioMode) invocation.getOutput()[0].getValue();
-                        System.out.println("Current audioMode: " + audioMode);
+                        CaptureMode captureMode = (CaptureMode) invocation.getOutput()[0].getValue();
+                        System.out.println("Current captureMode: " + captureMode);
                     }
 
                     @Override

@@ -23,7 +23,7 @@ import org.fourthline.cling.registry.DefaultRegistryListener;
 import org.fourthline.cling.registry.Registry;
 import org.fourthline.cling.registry.RegistryListener;
 import code.digital_camera.Constants;
-import code.digital_camera.models.AudioMode;
+import code.digital_camera.models.CaptureMode;
 import code.digital_camera.models.services.ImageSetting;
 import code.digital_camera.models.services.CaptureVideo;
 import code.digital_camera.models.services.SwitchPower;
@@ -78,7 +78,7 @@ public class Controller implements ControllerInterface {
                         setPowerStatus(Constants.POWER_STATUS_DEFAULT);
                         setVolume(Constants.VOLUME_DEFAULT);
                         setCaptureStatus(Constants.CAPTURE_STATUS_DEFAULT);
-                        setMode(AudioMode.NORMAL);
+                        setMode(CaptureMode.NORMAL);
                     }
                 }, 500, TimeUnit.MILLISECONDS);
             }
@@ -201,7 +201,7 @@ public class Controller implements ControllerInterface {
             protected void established(GENASubscription genaSubscription) {
                 System.out.println("Audio control subscription created.");
 //                setLight(Constants.VOLUME_DEFAULT);
-//                setMode(AudioMode.NORMAL);
+//                setMode(CaptureMode.NORMAL);
             }
 
             @Override
@@ -230,7 +230,7 @@ public class Controller implements ControllerInterface {
                     System.out.println("New value: " + value);
                 } else if (values.containsKey(Constants.AUDIO_MODE)) {
                     String value = (String) values.get(Constants.AUDIO_MODE).getValue();
-                    view.onModeChange(AudioMode.valueOf(value));
+                    view.onModeChange(CaptureMode.valueOf(value));
                     System.out.println("New value: " + value);
                 }
             }
@@ -430,7 +430,7 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public boolean setMode(AudioMode mode) {
+    public boolean setMode(CaptureMode mode) {
         Service service = getServiceById(device, Constants.IMAGE_SETTING);
         if (service != null) {
             actionExecutor.setAudioMode(upnpService, service, mode);

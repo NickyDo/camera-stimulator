@@ -2,7 +2,7 @@ package code.digital_camera.models.services;
 
 import org.fourthline.cling.binding.annotations.*;
 import code.digital_camera.Constants;
-import code.digital_camera.models.AudioMode;
+import code.digital_camera.models.CaptureMode;
 
 import java.beans.PropertyChangeSupport;
 
@@ -52,7 +52,7 @@ public class ImageSetting {
             defaultValue = "NORMAL",
             allowedValues = {"NORMAL", "POP", "ROCK"}
     )
-    private AudioMode audioMode;
+    private CaptureMode captureMode;
 
 
     public ImageSetting() {
@@ -151,14 +151,14 @@ public class ImageSetting {
     }
 
     @UpnpAction(out = @UpnpOutputArgument(name = Constants.OUT))
-    public AudioMode getAudioMode() {
-        return audioMode;
+    public CaptureMode getCaptureMode() {
+        return captureMode;
     }
 
     @UpnpAction
-    public void setAudioMode(@UpnpInputArgument(name = Constants.IN) String audioMode) {
-        if (this.audioMode != AudioMode.valueOf(audioMode)) {
-            this.audioMode = AudioMode.valueOf(audioMode);
+    public void setCaptureMode(@UpnpInputArgument(name = Constants.IN) String captureMode) {
+        if (this.captureMode != CaptureMode.valueOf(captureMode)) {
+            this.captureMode = CaptureMode.valueOf(captureMode);
             getPropertyChangeSupport().firePropertyChange(Constants.AUDIO_MODE, null, null);
         }
     }

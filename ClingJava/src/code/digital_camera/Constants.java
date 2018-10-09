@@ -1,6 +1,6 @@
 package code.digital_camera;
 
-import code.digital_camera.models.AudioMode;
+import code.digital_camera.models.CaptureMode;
 
 public class Constants {
     // device
@@ -38,7 +38,7 @@ public class Constants {
     public static final String SET_ZOOM_LEVEL = "SetZoomLevel";
     public static final String INCREASE_ZOOM_LEVEL = "IncreaseZoomLevel";
     public static final String DECREASE_ZOOM_LEVEL = "DecreaseZoomLevel";
-    public static final String AUDIO_MODE = "AudioMode";
+    public static final String AUDIO_MODE = "CaptureMode";
     public static final String GET_AUDIO_MODE = "GetAudioMode";
     public static final String SET_AUDIO_MODE = "SetAudioMode";
 
@@ -81,6 +81,6 @@ public class Constants {
     public static final boolean TIMER_STATUS_DEFAULT = false;
     public static final boolean CAPTURE_STATUS_DEFAULT = true;
     public static final boolean POWER_STATUS_DEFAULT = true;
-    public static final AudioMode AUDIO_MODE_DEFAULT = AudioMode.NORMAL;
+    public static final CaptureMode AUDIO_MODE_DEFAULT = CaptureMode.NORMAL;
     public static final int DEFAULT_TIMER_VALUE = 10;
 }

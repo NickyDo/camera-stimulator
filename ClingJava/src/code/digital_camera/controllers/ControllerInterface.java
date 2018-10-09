@@ -1,6 +1,6 @@
 package code.digital_camera.controllers;
 
-import code.digital_camera.models.AudioMode;
+import code.digital_camera.models.CaptureMode;
 
 public interface ControllerInterface {
     boolean setPowerStatus(boolean status);
@@ -12,7 +12,7 @@ public interface ControllerInterface {
     boolean setContrastLevel(int value);
     boolean increaseContrastLevel();
     boolean decreaseContrastLevel();
-    boolean setMode(AudioMode mode);
+    boolean setMode(CaptureMode mode);
     boolean setCaptureStatus(boolean status);
     boolean nextTrack();
     boolean prevTrack();
