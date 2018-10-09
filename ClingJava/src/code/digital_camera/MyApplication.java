@@ -23,7 +23,7 @@ public class MyApplication extends Application{
         view.setController(controller);
 
         primaryStage.setTitle("Audio System");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 600, 300));
         primaryStage.setResizable(false);
         primaryStage.show();
     }

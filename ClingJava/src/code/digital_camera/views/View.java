@@ -113,7 +113,7 @@ public class View implements Initializable, ViewInterface {
             audioEqualizer.setEnabled(true);
             ObservableList<EqualizerBand> list = audioEqualizer.getBands();
 
-            double scale = bassSlider.getValue() / 120;
+            double scale = bassSlider.getValue() / 100;
             for (int i = 0; i < 3; i++) {
                 list.get(i).setGain(scale * (11 - i));
             }
@@ -122,7 +122,7 @@ public class View implements Initializable, ViewInterface {
             for (int i = 6; i < 10; i++) {
                 list.get(i).setGain(scale * (i - 22));
             }
-            if (!bassSlider.isValueChanging() || bassSlider.getValue() == 120 || bassSlider.getValue() == 0) {
+            if (!bassSlider.isValueChanging() || bassSlider.getValue() == 100 || bassSlider.getValue() == 0) {
                 controller.setContrastLevel((int) bassSlider.getValue());
             }
             bassNumber.setText(String.format("%.0f", bassSlider.getValue()));
@@ -133,7 +133,7 @@ public class View implements Initializable, ViewInterface {
             audioEqualizer.setEnabled(true);
             ObservableList<EqualizerBand> list = audioEqualizer.getBands();
 
-            double scale = trebleSlider.getValue() / 120;
+            double scale = trebleSlider.getValue() / 100;
             for (int i = 0; i < 3; i++) {
                 list.get(i).setGain(scale * (i - 11));
             }
@@ -143,7 +143,7 @@ public class View implements Initializable, ViewInterface {
                 list.get(i).setGain(scale * (3 + i));
             }
 
-            if (!trebleSlider.isValueChanging() || trebleSlider.getValue() == 120 || trebleSlider.getValue() == 0) {
+            if (!trebleSlider.isValueChanging() || trebleSlider.getValue() == 100 || trebleSlider.getValue() == 0) {
                 controller.setZoomLevel((int) trebleSlider.getValue());
             }
             trebleNumber.setText(String.format("%.0f", trebleSlider.getValue()));
@@ -159,14 +159,14 @@ public class View implements Initializable, ViewInterface {
     public void pauseCont(MouseEvent event) {
         if (mediaPlayer.getStatus().equals(MediaPlayer.Status.PAUSED)) {
             mediaPlayer.play();
-            System.out.println("Resumed");
-            playMode.setText("PLAY");
+            System.out.println("ON");
+            playMode.setText("ON");
             controller.setCaptureStatus(true);
         }
         if (mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
             mediaPlayer.pause();
-            System.out.println("Paused");
-            playMode.setText("PAUSE");
+            System.out.println("OFF");
+            playMode.setText("OFF");
             controller.setCaptureStatus(false);
         }
     }
@@ -175,46 +175,46 @@ public class View implements Initializable, ViewInterface {
     public void handlePlay(MouseEvent event) {
         if (mediaPlayer.getStatus().equals(MediaPlayer.Status.READY)) {
             mediaPlayer.play();
-            System.out.println("Playing");
+            System.out.println("ON");
         }
         if (mediaPlayer.getStatus().equals(MediaPlayer.Status.STOPPED)) {
             mediaPlayer.play();
-            System.out.println("Playing after stopped");
+            System.out.println("ON after stopped");
         }
         if (mediaPlayer.getStatus().equals(MediaPlayer.Status.PAUSED)) {
             mediaPlayer.play();
-            System.out.println("Playing after paused");
+            System.out.println("ON after paused");
         }
-        playMode.setText("PLAY");
+        playMode.setText("ON");
         controller.setCaptureStatus(true);
     }
 
     @FXML
     public void upVolume(MouseEvent event) {
         double volume = mediaPlayer.getVolume();
-        if (volume <= 0.9) {
-            volume += 0.1;
+        if (volume <= 9) {
+            volume += 1;
             System.out.println("Current volume: " + volume);
             mediaPlayer.setVolume(volume);
             controller.increaseLight();
         } else {
             System.out.println("At maximum value");
         }
-        volLVL.setText(String.format("%.1f", volume));
+        volLVL.setText(String.format("%f x", volume));
     }
 
     @FXML
     public void downVolume(MouseEvent event) {
         double volume = mediaPlayer.getVolume();
-        if (volume >= 0.1) {
-            volume -= 0.1;
+        if (volume >= 1) {
+            volume -= 1;
             System.out.println("Current volume: " + volume);
             mediaPlayer.setVolume(volume);
             controller.decreaseLight();
         } else {
             System.out.println("At minimum value");
         }
-        volLVL.setText(String.format("%.1f", volume));
+        volLVL.setText(String.format("%f x", volume));
     }
 
     @FXML
@@ -310,8 +310,8 @@ public class View implements Initializable, ViewInterface {
             @Override
             public void run() {
                 if (newValue <= Constants.LIGHT_MAX && newValue >= Constants.LIGHT_MIN) {
-                    mediaPlayer.setVolume((double) newValue / 100);
-                    volLVL.setText(String.format("%.1f", mediaPlayer.getVolume()));
+                    mediaPlayer.setVolume((double) newValue / 10);
+                    volLVL.setText(String.format("%f x", mediaPlayer.getVolume()));
                 }
             }
         });
@@ -396,10 +396,10 @@ public class View implements Initializable, ViewInterface {
             public void run() {
                 if (newStatus) {
                     mediaPlayer.play();
-                    playMode.setText("PLAY");
+                    playMode.setText("ON");
                 } else {
                     mediaPlayer.pause();
-                    playMode.setText("PAUSE");
+                    playMode.setText("OFF");
                 }
             }
         });
